@@ -13,7 +13,7 @@ function App() {
 
   const getFlashcard = () => {
     axios
-         .get('http://localhost:8000/api/flashcards')
+         .get('http://flashcards-backend-ga.herokuapp.com/api/flashcards')
          .then(
            (response) => setFlashcards(response.data),
            (err) => console.error(err)
@@ -23,7 +23,7 @@ function App() {
 
   const handleCreate = (addFlashcard) => {
     axios
-         .post('http://localhost:8000/api/flashcards', addFlashcard)
+         .post('http://flashcards-backend-ga.herokuapp.com/api/flashcards', addFlashcard)
          .then((response)=> {
             console.log(response);
             getFlashcard()
@@ -32,7 +32,7 @@ function App() {
 
   const handleDelete = (event, deletedFlashcards) => {
     axios
-        .delete('http://localhost:8000/api/flashcards/' + event.target.value)
+        .delete('http://flashcards-backend-ga.herokuapp.com/api/flashcards/' + event.target.value)
         .then((response) => {
           setFlashcards(
             flashcards.filter(x => x.id !== deletedFlashcards.id)
@@ -43,7 +43,7 @@ function App() {
   const handleUpdate = (editFlashcard) => {
     console.log(editFlashcard);
     axios 
-        .put('http://localhost:8000/api/flashcards/' + editFlashcard.id, editFlashcard )
+        .put('http://flashcards-backend-ga.herokuapp.com/api/flashcards/' + editFlashcard.id, editFlashcard )
         .then((respose) => {
           getFlashcard()
         })
