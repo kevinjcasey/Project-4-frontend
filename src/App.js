@@ -80,10 +80,4 @@ function App() {
   );
 }
 
-<<<<<<< HEAD:flashcards/src/App.js
-
-
-
-=======
->>>>>>> main:src/App.js
 export default App;
