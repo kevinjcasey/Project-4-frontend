@@ -3,9 +3,14 @@ import React, { useState, useEffect } from 'react'
 import App from '../App'
 
 const Add = (props) => {
-    let emptyflashcard = {subject: '' , question: '', answer: '' }
 
-    const [flashcards, setFlashcards] = useState([emptyflashcard])
+    let emptyFlashcard = {
+        subject: '', 
+        question: '', 
+        answer: '' 
+    }
+
+    const [flashcards, setFlashcards] = useState([emptyFlashcard])
 
     const handleChange = (event) => {
         setFlashcards({...flashcards, [event.target.name]: event.target.value})
@@ -15,10 +20,6 @@ const Add = (props) => {
         event.preventDefault()
         props.handleCreate(flashcards)
     }
-
-    
-
-    
 
     return(
     <>
@@ -37,4 +38,5 @@ const Add = (props) => {
     </>
     )
 }
+
     export default Add

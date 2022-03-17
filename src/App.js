@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/Add'
 import Edit from './components/Edit'
-
-
-
+import { 
+  Typography, 
+  Button, 
+  Container
+} from '@mui/material'
 
 
 function App() {
@@ -49,34 +51,43 @@ function App() {
         })
   }
 
-
-
   useEffect(() => {
     getFlashcard()
   }, [])
 
   return (
-    <>
-    <h1>App</h1>
-    <Add handleCreate={handleCreate} />
-    <div className='flashcards'>
-     {flashcards.map((flashcard)=>{
-       return(
-         
-         <div className='flashcard' key={flashcard.id}>
-         <h4>Subject: {flashcard.subject}</h4>
-         <h4>Question: {flashcard.question}</h4>
-         <h4>answer: {flashcard.answer}</h4>
-         <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
-         <button onClick={(event) =>{handleDelete(event,flashcard)}} value={flashcard.id}>X</button>
-         </div>
-       )
+    <Container >
+      <h1>App</h1>
+      <Add handleCreate={handleCreate} />
+      <div className='flashcards'>
+        <Typography 
+          variant="h6"
+          color="primary"
+          align="center"
+        >
+          {flashcards.map((flashcard)=>{
+            return(
+              
+              <div className='flashcard' key={flashcard.id}>
+              <h4>Subject: {flashcard.subject}</h4>
+              <h4>Question: {flashcard.question}</h4>
+              <h4>answer: {flashcard.answer}</h4>
+              <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
+              <Button 
+                onClick={(event) =>{handleDelete(event,flashcard)}} 
+                value={flashcard.id}
+                color="secondary"
+                variant="contained"
+              >
+              Delete Card
+              </Button>
+              </div>
 
-     })}
-
-
-    </div>
-    </>
+            )
+          })}
+        </Typography>
+      </div>
+    </Container>
   );
 }
 
