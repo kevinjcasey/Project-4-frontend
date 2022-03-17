@@ -5,9 +5,14 @@ import Edit from './components/Edit'
 import { 
   Typography, 
   Button, 
-  Container
+  Container,
+  Paper
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
+
+// ========== MUI Carousel =========== //
+
+import Carousel from 'react-material-ui-carousel'
 
 // ============ MUI Theme stuff =========== //
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -28,7 +33,7 @@ const theme = createTheme({
 })
 // ========== ^^MUI Theme stuff^^ ========= //
 
-function App() {
+function App(props) {
 
   const [flashcards, setFlashcards] = useState([])
 
@@ -85,13 +90,19 @@ function App() {
             color="primary"
             align="center"
           >
+          <Carousel 
+            className="carousel" 
+            autoPlay="undefined"
+            stopAutoPlayOnHover="false"
+            indicators="false"
+          >
             {flashcards.map((flashcard)=>{
               return(
                 
                 <div className='flashcard' key={flashcard.id}>
-                <h4>Subject: {flashcard.subject}</h4>
-                <h4>Question: {flashcard.question}</h4>
-                <h4>answer: {flashcard.answer}</h4>
+                <h4>-{flashcard.subject}-</h4>
+                <h4>{flashcard.question}</h4>
+                <h4>Answer: {flashcard.answer}</h4>
                 <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
                 <Button 
                   onClick={(event) =>{handleDelete(event,flashcard)}} 
@@ -103,9 +114,9 @@ function App() {
                 Delete 
                 </Button>
                 </div>
-
               )
             })}
+          </Carousel>
           </Typography>
         </div>
       </Container>

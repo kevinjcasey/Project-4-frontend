@@ -14,6 +14,10 @@ code {
     monospace;
 }
 
-/* .flashcards {
-  text-align: center;
-} */
+.carousel {
+  border: 1px solid black;
+  /* background-image: url(https://image.shutterstock.com/image-vector/index-card-vector-260nw-5345878.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; */
+  padding-bottom: 100px;
+}
