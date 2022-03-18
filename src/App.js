@@ -78,8 +78,13 @@ function App(props) {
 
     const [isFlipped, setIsFlipped] = useState(false);
 
+    const closeDetails = () => {
+        document.getElementById("details").removeAttribute("open");
+    };
+
     const handleClick = (e) => {
         e.preventDefault();
+        closeDetails();
         setIsFlipped(!isFlipped);
     };
 
@@ -145,10 +150,10 @@ function App(props) {
                                             <div /*Back of card*/>
                                                 <Card className="Card1">
                                                     <CardContent>
-                                                        <Typography gutterBottom variant="h3">
+                                                        <Typography gutterBottom paddingTop="20px" marginBottom="80px" variant="h3">
                                                             Answer
                                                         </Typography>
-                                                        <Typography variant="h4" padding="50px">
+                                                        <Typography variant="h4" marginBottom="30px" padding="50px">
                                                             {flashcard.answer}
                                                         </Typography>
                                                     </CardContent>

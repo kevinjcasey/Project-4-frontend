@@ -14,9 +14,13 @@ const Edit = (props) => {
         props.handleUpdate(flashcards);
     };
 
+    const closeDetails = () => {
+        document.getElementById("details").removeAttribute("open");
+    };
+
     return (
         <>
-            <details>
+            <details id="details">
                 <summary>Edit flashcard</summary>
                 <center>
                     <form onSubmit={handleSubmit}>
@@ -31,6 +35,7 @@ const Edit = (props) => {
                             //  endIcon={<SendIcon />}
                             color="success"
                             type="submit"
+                            onClick={closeDetails}
                         >
                             Edit
                         </Button>
