@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "/Users/angelvalentin/dev/Unit Projects/unit-4-frontend/Project-4-frontend/src/App.css";
 import axios from "axios";
 import Add from "./components/Add";
 import Edit from "./components/Edit";
@@ -28,6 +28,9 @@ const theme = createTheme({
         fontWeightLight: "600",
         fontWeightLight: "700",
     },
+    Carousel: {
+        padding: 0,
+    },
 });
 // ========== ^^MUI Theme stuff^^ ========= //
 
@@ -54,6 +57,7 @@ function App(props) {
     const handleDelete = (event, deletedFlashcards) => {
         axios.delete("http://localhost:8000/api/flashcards/" + event.target.value).then((response) => {
             setFlashcards(flashcards.filter((x) => x.id !== deletedFlashcards.id));
+            // getFlashcard();
         });
     };
 
@@ -72,6 +76,13 @@ function App(props) {
         getFlashcard();
     }, []);
 
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setIsFlipped(!isFlipped);
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <AppBar id="AppBar" position="relative" gutterBottom>
@@ -86,8 +97,6 @@ function App(props) {
                 Index Cards On the Flash
             </Typography>
             <Container>
-                <h1>App</h1>
-                <Add handleCreate={handleCreate} />
                 <div className="flashcards">
                     <Typography variant="h6" color="primary" align="center">
                         <Carousel
@@ -103,87 +112,61 @@ function App(props) {
                         >
                             {flashcards.map((flashcard) => {
                                 return (
-                                    <Grid container justifyContent="center" gap="20px">
-                                        {cards.map((card) => (
-                                            <>
-                                                <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" spacing={4}>
-                                                    <div>
-                                                        <Grid item spacing={4} xs={12} sm={6} md={4} key="front">
-                                                            <Card className={classes.card}>
-                                                                <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image tite" />
-                                                                <CardContent className={classes.cardContent}>
-                                                                    <Typography gutterBottom variant="h5">
-                                                                        Heading
-                                                                    </Typography>
-                                                                    <Typography>This is a media card. Lorem ipsum dolor sit amet</Typography>
-                                                                </CardContent>
-                                                                <CardActions>
-                                                                    <Button size="small" color="primary">
-                                                                        View
-                                                                    </Button>
-                                                                    <Button variant="contained" size="small" color="primary">
-                                                                        Edit
-                                                                    </Button>
-                                                                    <Button variant="contained" size="small" color="primary" onClick={handleClick}>
-                                                                        Flip
-                                                                    </Button>
-                                                                </CardActions>
-                                                            </Card>
-                                                        </Grid>
+                                    <div className="flashcard" key={flashcard.id}>
+                                        <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" spacing={4}>
+                                            <div /* Front of card */>
+                                                <Card className="Card1">
+                                                    <Typography gutterBottom padding="30px" variant="h3">
+                                                        Subject: {flashcard.subject}
+                                                    </Typography>
+                                                    <Typography padding="50px" variant="h4">
+                                                        {flashcard.question}
+                                                    </Typography>
+                                                    <div className="CardAction">
+                                                        <Button
+                                                            onClick={(event) => {
+                                                                handleDelete(event, flashcard);
+                                                            }}
+                                                            value={flashcard.id}
+                                                            variant="contained"
+                                                            color="error"
+                                                            startIcon={<DeleteIcon />}
+                                                        >
+                                                            Delete
+                                                        </Button>
+                                                        <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
+                                                        <Button variant="contained" size="small" color="primary" onClick={handleClick}>
+                                                            Flip
+                                                        </Button>
                                                     </div>
+                                                </Card>
+                                            </div>
 
-                                                    <div>
-                                                        <Grid item xs={12} sm={6} md={4} key="back">
-                                                            <Card className={classes.card}>
-                                                                <CardContent className={classes.cardContent}>
-                                                                    <Typography gutterBottom variant="h5">
-                                                                        Heading
-                                                                    </Typography>
-                                                                    <Typography>This is a media card. Lorem ipsum dolor sit amet</Typography>
-                                                                </CardContent>
-                                                                <CardActions>
-                                                                    <Button size="small" color="primary">
-                                                                        View
-                                                                    </Button>
-                                                                    <Button variant="contained" size="small" color="primary">
-                                                                        Edit
-                                                                    </Button>
-                                                                    <Button variant="contained" size="small" color="primary" onClick={handleClick}>
-                                                                        Flip Card
-                                                                    </Button>
-                                                                </CardActions>
-                                                            </Card>
-                                                        </Grid>
-                                                        {/* <button >
-                                                    Click to flip
-                                                </button> */}
-                                                    </div>
-                                                </ReactCardFlip>
-                                            </>
-                                        ))}
-                                    </Grid>
-                                    // <div className="flashcard" key={flashcard.id}>
-                                    //     <h4>-{flashcard.subject}-</h4>
-                                    //     <h4>{flashcard.question}</h4>
-                                    //     <h4>Answer: {flashcard.answer}</h4>
-                                    //     <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
-                                    //     <Button
-                                    //         onClick={(event) => {
-                                    //             handleDelete(event, flashcard);
-                                    //         }}
-                                    //         value={flashcard.id}
-                                    //         variant="contained"
-                                    //         color="error"
-                                    //         startIcon={<DeleteIcon />}
-                                    //     >
-                                    //         Delete
-                                    //     </Button>
-                                    // </div>
+                                            <div /*Back of card*/>
+                                                <Card className="Card1">
+                                                    <CardContent>
+                                                        <Typography gutterBottom variant="h3">
+                                                            Answer
+                                                        </Typography>
+                                                        <Typography variant="h4" padding="50px">
+                                                            {flashcard.answer}
+                                                        </Typography>
+                                                    </CardContent>
+                                                    <CardActions className="CardAction">
+                                                        <Button variant="contained" size="small" color="primary" onClick={handleClick}>
+                                                            Flip
+                                                        </Button>
+                                                    </CardActions>
+                                                </Card>
+                                            </div>
+                                        </ReactCardFlip>
+                                    </div>
                                 );
                             })}
                         </Carousel>
                         <LinearProgress variant="determinate" value={progress} />
                     </Typography>
+                    <Add handleCreate={handleCreate} />
                 </div>
             </Container>
         </ThemeProvider>

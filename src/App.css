@@ -31,3 +31,23 @@
 #AppBar {
     margin-bottom: 40px;
 }
+
+.Card1 {
+    height: 570px !important;
+}
+
+.CardAction {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.css-1abc02a {
+    height: auto;
+}
+.carousel {
+    height: 450px;
+    padding-bottom: 0;
+}
