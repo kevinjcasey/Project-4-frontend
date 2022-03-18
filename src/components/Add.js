@@ -1,6 +1,10 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import App from '../App'
+import { 
+    Button, 
+    TextField
+  } from '@mui/material'
 
 const Add = (props) => {
 
@@ -22,21 +26,49 @@ const Add = (props) => {
     }
 
     return(
-    <>
-        <form onSubmit={handleSubmit}> 
-            <label htmlFor='subject'>subject</label>
-            <input type= 'text' name='subject' onChange={handleChange}/>
+        <center>
+            <h3>Index Cards On the Flash</h3>
+            <form onSubmit={handleSubmit}>
+            
+            <TextField
+            label='Subject'
+            name='subject'
+            id="outlined-size-small"
+            size="small"
+            type='text'
+            onChange={handleChange}/>
             <br />
-            <label htmlFor='question' >question</label>
-            <input type= 'text' name='question' onChange={handleChange}/>
             <br />
-            <label htmlFor='answer'>answer</label>
-            <input type= 'text' name='answer' onChange={handleChange}/>
+            
+            <TextField
+            label='Question'
+            name='question'
+            id="outlined-size-small"
+            size="small"
+            type='text'
+            onChange={handleChange}/>
             <br />
-            <input type='submit' />
-        </form>
-    </>
+            <br />
+            
+            <TextField
+            label='Answer'
+            name='answer'
+            id="outlined-size-small"
+            size="small"
+            type='text'
+            onChange={handleChange}/>
+            <br />
+            <br />
+
+            <Button
+            type='submit'
+            variant="contained"
+            color="success"
+            >Submit
+            </Button>
+            </form>
+        </center>
     )
 }
 
-    export default Add
+export default Add

@@ -3,10 +3,10 @@ import axios from 'axios'
 import Add from './components/Add'
 import Edit from './components/Edit'
 import { 
-  Typography, 
   Button, 
+  LinearProgress,
   Container,
-  Paper
+  Typography
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -32,6 +32,7 @@ const theme = createTheme({
   }
 })
 // ========== ^^MUI Theme stuff^^ ========= //
+
 
 function App(props) {
 
@@ -75,6 +76,10 @@ function App(props) {
         })
   }
 
+  // ========== Progress Bar stuff ========== //
+
+  const [progress, setProgress] = useState(80)
+
   useEffect(() => {
     getFlashcard()
   }, [])
@@ -92,9 +97,14 @@ function App(props) {
           >
           <Carousel 
             className="carousel" 
-            autoPlay="undefined"
-            stopAutoPlayOnHover="false"
-            indicators="false"
+            autoPlay={false}
+            indicators={false}
+            navButtonsWrapperProps={{
+              style: {
+                  bottom: '0',
+                  top: 'unset'
+              }
+          }}
           >
             {flashcards.map((flashcard)=>{
               return(
@@ -117,6 +127,10 @@ function App(props) {
               )
             })}
           </Carousel>
+          <LinearProgress 
+            variant="determinate"
+            value={progress}
+          />
           </Typography>
         </div>
       </Container>
