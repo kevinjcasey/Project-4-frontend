@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/Add'
 import Edit from './components/Edit'
-
+import {Button} from '@mui/material'
 
 
 
@@ -10,6 +10,7 @@ import Edit from './components/Edit'
 function App() {
 
   const [flashcards, setFlashcards] = useState([])
+  const [showAns, setShowAns] = useState(false)
 
   const getFlashcard = () => {
     axios
@@ -51,13 +52,14 @@ function App() {
 
 
 
+
   useEffect(() => {
     getFlashcard()
   }, [])
 
   return (
     <>
-    <h1>App</h1>
+    <center><h1>FlashPrep</h1></center>
     <Add handleCreate={handleCreate} />
     <div className='flashcards'>
      {flashcards.map((flashcard)=>{
@@ -68,9 +70,10 @@ function App() {
          <h4>Question: {flashcard.question}</h4>
          <h4>answer: {flashcard.answer}</h4>
          <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
-         <button onClick={(event) =>{handleDelete(event,flashcard)}} value={flashcard.id}>X</button>
+         <Button onClick={(event) =>{handleDelete(event,flashcard)}} value={flashcard.id}>X</Button>
          </div>
        )
+       
 
      })}
 
