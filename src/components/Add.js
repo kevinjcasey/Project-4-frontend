@@ -1,74 +1,49 @@
-import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import App from '../App'
-import { 
-    Button, 
-    TextField
-  } from '@mui/material'
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import App from "../App";
+import { Button, TextField } from "@mui/material";
 
 const Add = (props) => {
-
     let emptyFlashcard = {
-        subject: '', 
-        question: '', 
-        answer: '' 
-    }
+        subject: "",
+        question: "",
+        answer: "",
+    };
 
-    const [flashcards, setFlashcards] = useState([emptyFlashcard])
+    const [flashcards, setFlashcards] = useState([emptyFlashcard]);
 
     const handleChange = (event) => {
-        setFlashcards({...flashcards, [event.target.name]: event.target.value})
-    }
+        setFlashcards({ ...flashcards, [event.target.name]: event.target.value });
+    };
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        props.handleCreate(flashcards)
-    }
+        event.preventDefault();
+        props.handleCreate(flashcards);
+    };
 
-    return(
+    return (
         <center>
-            <h3>Index Cards On the Flash</h3>
+            <h3>Add New Index Card</h3>
             <form onSubmit={handleSubmit}>
-            
-            <TextField
-            label='Subject'
-            name='subject'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            
-            <TextField
-            label='Question'
-            name='question'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            
-            <TextField
-            label='Answer'
-            name='answer'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
+                <TextField label="Subject" name="subject" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
+                <br />
+                <br />
 
-            <Button
-            type='submit'
-            variant="contained"
-            color="success"
-            >Submit
-            </Button>
+                <TextField label="Question" name="question" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
+                <br />
+                <br />
+
+                <TextField label="Answer" name="answer" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
+                <br />
+                <br />
+
+                <Button type="submit" variant="contained" color="success">
+                    Submit
+                </Button>
             </form>
+            <br />
         </center>
-    )
-}
+    );
+};
 
-export default Add
+export default Add;
