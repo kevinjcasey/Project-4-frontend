@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
-
-    const Edit = (props) => {
+export const Edit = (props) => {
     let emptyflashcard = {...props.flashcard}
     const [flashcards, setFlashcards] = useState(emptyflashcard)
 
@@ -33,4 +32,3 @@ import React, { useState } from 'react'
         </>
     )
 }
-        export default Edit

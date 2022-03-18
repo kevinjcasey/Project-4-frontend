@@ -1,12 +1,12 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import App from '../App'
+import axios from 'axios'
+import { Home } from './Home'
 import { 
     Button, 
     TextField
   } from '@mui/material'
 
-const Add = (props) => {
+export const Add = (props) => {
 
     let emptyFlashcard = {
         subject: '', 
@@ -21,6 +21,7 @@ const Add = (props) => {
     }
 
     const handleSubmit = (event) => {
+        console.log('hello');
         event.preventDefault()
         props.handleCreate(flashcards)
     }
