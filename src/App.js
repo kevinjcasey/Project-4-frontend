@@ -87,7 +87,7 @@ function App(props) {
         <ThemeProvider theme={theme}>
             <AppBar id="AppBar" position="relative" gutterBottom>
                 <Toolbar>
-                    <Typography variant="h6">FlashPrep </Typography>
+                    <Typography variant="h6">Home</Typography>
                 </Toolbar>
             </AppBar>
             <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
