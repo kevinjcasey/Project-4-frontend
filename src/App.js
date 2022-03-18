@@ -3,7 +3,9 @@ import "/Users/angelvalentin/dev/Unit Projects/unit-4-frontend/Project-4-fronten
 import axios from "axios";
 import Add from "./components/Add";
 import Edit from "./components/Edit";
-import { Button, LinearProgress, Container, Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar } from "@mui/material";
+import AllCards from "./components/AllCards";
+
+import { Button, LinearProgress, Container, Typography, AppBar, Card, CardActions, CardContent, Toolbar } from "@mui/material";
 import ReactCardFlip from "react-card-flip";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -84,8 +86,8 @@ function App(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        closeDetails();
         setIsFlipped(!isFlipped);
+        closeDetails();
     };
 
     return (
@@ -172,6 +174,7 @@ function App(props) {
                         <LinearProgress variant="determinate" value={progress} />
                     </Typography>
                     <Add handleCreate={handleCreate} />
+                    <AllCards />
                 </div>
             </Container>
         </ThemeProvider>
