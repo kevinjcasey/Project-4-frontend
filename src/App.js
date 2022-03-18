@@ -8,7 +8,7 @@ function App(props) {
   return (
     <Routes>
       <Route path='/' element={<Home />}/>
-      <Route path='add' element={<Add handleCreate={props.handleCreate} />}/>
+      <Route path='add' element={<Add />}/>
       <Route path='edit' element={<Edit />}/>
     </Routes>
   )

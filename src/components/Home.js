@@ -55,7 +55,7 @@ export const Home = (props) => {
             console.log(response);
             getFlashcard()
          })
-}
+  }   
 
   const handleDelete = (event, deletedFlashcards) => {
     axios
@@ -87,7 +87,9 @@ export const Home = (props) => {
     return (
         <>
         <Link to="/add">Add Flashcard</Link>
-        
+        <br/>
+        <br/>
+        <Link to="/edit" >View All Flashcards</Link>
         <ThemeProvider theme={theme}>
             <Container >
                 <h1>App</h1>
@@ -101,7 +103,7 @@ export const Home = (props) => {
                             className="carousel" 
                             autoPlay={false}
                             indicators={false}
-                            navButtonsAlwaysInvisible={false}
+                            navButtonsAlwaysVisible={true}
                         >
                             {flashcards.map((flashcard)=>{
                             return (

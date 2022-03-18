@@ -6,7 +6,7 @@ import {
     TextField
   } from '@mui/material'
 
-export const Add = (props) => {
+export const Add = () => {
 
     let emptyFlashcard = {
         subject: '', 
@@ -20,53 +20,60 @@ export const Add = (props) => {
         setFlashcards({...flashcards, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = (event) => {
-        console.log('hello');
-        event.preventDefault()
-        props.handleCreate(flashcards)
+    const handleCreate = (addFlashcard)  => {
+        axios
+             .post('http://localhost:8000/api/flashcards', addFlashcard)
+             .then((response)=> {
+                setFlashcards([response.data])
+        })
     }
 
-    return(
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        handleCreate(flashcards)
+    }
+
+    return (
         <center>
             <h3>Index Cards On the Flash</h3>
             <form onSubmit={handleSubmit}>
             
-            <TextField
-            label='Subject'
-            name='subject'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            
-            <TextField
-            label='Question'
-            name='question'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            
-            <TextField
-            label='Answer'
-            name='answer'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
+                <TextField
+                label='Subject'
+                name='subject'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+                
+                <TextField
+                label='Question'
+                name='question'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+                
+                <TextField
+                label='Answer'
+                name='answer'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
 
-            <Button
-            type='submit'
-            variant="contained"
-            color="success"
-            >Submit
-            </Button>
+                <Button
+                type='submit'
+                variant="contained"
+                color="success"
+                >Submit
+                </Button>
             </form>
         </center>
     )
