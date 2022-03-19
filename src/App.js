@@ -2,11 +2,18 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/Add'
 import Edit from './components/Edit'
+
 import { 
   Button, 
   LinearProgress,
   Container,
-  Typography
+  Typography,
+  AppBar,
+  Toolbar,
+  Snackbar,
+  IconButton,
+  Alert
+
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -32,6 +39,10 @@ const theme = createTheme({
   }
 })
 // ========== ^^MUI Theme stuff^^ ========= //
+
+
+
+
 
 
 function App(props) {
@@ -64,6 +75,8 @@ function App(props) {
           setFlashcards(
             flashcards.filter(x => x.id !== deletedFlashcards.id)
           )
+            handleClick()
+
         })
   }
 
@@ -79,6 +92,23 @@ function App(props) {
   // ========== Progress Bar stuff ========== //
 
   const [progress, setProgress] = useState(80)
+  // ======================================== //
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setOpen(false);
+  };
+  
+  // ========== ^^SnackBar^^================= //
+
 
   useEffect(() => {
     getFlashcard()
@@ -86,9 +116,18 @@ function App(props) {
 
   return (
     <ThemeProvider theme={theme}>
+      <AppBar id="AppBar" position="relative" gutterBottom>
+                <Toolbar>
+                    <Typography variant="h6">Home</Typography>
+                </Toolbar>
+            </AppBar>
+            <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+                FlashPrep
+            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                Index Cards On the Flash
+            </Typography>
       <Container >
-        <h1>App</h1>
-        <Add handleCreate={handleCreate} />
         <div className='flashcards'>
           <Typography 
             variant="h6"
@@ -115,7 +154,7 @@ function App(props) {
                 <h4>Answer: {flashcard.answer}</h4>
                 <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
                 <Button 
-                  onClick={(event) =>{handleDelete(event,flashcard)}} 
+                  onClick={(event) =>{handleDelete(event,flashcard)}}
                   value={flashcard.id}
                   variant="contained"
                   color="error"
@@ -123,6 +162,11 @@ function App(props) {
                 >
                 Delete 
                 </Button>
+                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    Index Card Deleted
+                  </Alert>
+                </Snackbar>
                 </div>
               )
             })}
@@ -134,7 +178,10 @@ function App(props) {
           </Typography>
         </div>
       </Container>
+      <Add handleCreate={handleCreate} />
+
     </ThemeProvider>
+
   );
 }
 
