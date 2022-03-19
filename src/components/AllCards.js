@@ -23,9 +23,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
     },
-    cardMedia: {
-        paddingTop: "56.25%",
-    },
+
     CardContent: {
         flexGrow: 1,
     },
@@ -66,7 +64,7 @@ const App = () => {
 
             <main>
                 <Container className={classes.cardGrid} maxWidth="md">
-                    <Grid container spacing={4}>
+                    <Grid container>
                         <div>
                             <Container className={classes.cardGrid} maxWidth="md">
                                 <Grid container justifyContent="center" gap="20px">
@@ -74,7 +72,7 @@ const App = () => {
                                         <>
                                             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" spacing={4}>
                                                 <div>
-                                                    <Grid item spacing={4} xs={12} sm={6} md={4} key="front">
+                                                    <Grid item spacing={6} xs={12} sm={6} md={4} key="front">
                                                         <Card className={classes.card}>
                                                             <CardContent className={classes.cardContent}>
                                                                 <Typography gutterBottom variant="h5">

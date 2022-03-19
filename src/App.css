@@ -36,6 +36,13 @@
     height: 570px !important;
 }
 
+/* .Card1 {
+    height: 100;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+} */
+
 .CardAction {
     display: flex;
     width: 100%;
@@ -44,10 +51,17 @@
     margin: 20px 0;
 }
 
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+    box-shadow: none;
+}
 .css-1abc02a {
     height: auto;
 }
 .carousel {
+    border: 2px solid rgba(157, 157, 157, 0.406);
+    border-radius: 8px;
+    /* box-shadow: 8px 10px 5px grey; */
+    width: auto;
     height: 450px;
     padding-bottom: 0;
 }

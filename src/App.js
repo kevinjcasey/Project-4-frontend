@@ -110,11 +110,19 @@ function App(props) {
                             className="carousel"
                             autoPlay={false}
                             indicators={false}
-                            navButtonsWrapperProps={{
-                                style: {
-                                    bottom: "0",
-                                    top: "unset",
-                                },
+                            navButtonsAlwaysVisible={true}
+                            animation="slide"
+                            duration="400"
+                            swipe="true"
+                            NavButton={({ onClick, className, style, next, prev }) => {
+                                // Other logic
+
+                                return (
+                                    <Button onClick={onClick} className={className} style={style}>
+                                        {next && "Next"}
+                                        {prev && "Previous"}
+                                    </Button>
+                                );
                             }}
                         >
                             {flashcards.map((flashcard) => {
@@ -137,12 +145,13 @@ function App(props) {
                                                             value={flashcard.id}
                                                             variant="contained"
                                                             color="error"
+                                                            size="large"
                                                             startIcon={<DeleteIcon />}
                                                         >
                                                             Delete
                                                         </Button>
                                                         <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
-                                                        <Button variant="contained" size="small" color="primary" onClick={handleClick}>
+                                                        <Button variant="contained" size="large" color="primary" onClick={handleClick}>
                                                             Flip
                                                         </Button>
                                                     </div>
@@ -160,7 +169,7 @@ function App(props) {
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions className="CardAction">
-                                                        <Button variant="contained" size="small" color="primary" onClick={handleClick}>
+                                                        <Button variant="contained" size="medium" color="primary" onClick={handleClick}>
                                                             Flip
                                                         </Button>
                                                     </CardActions>
