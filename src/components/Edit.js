@@ -6,21 +6,17 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 export const Edit = (props) => {
 
-    // let emptyFlashcard = {
-    //     subject: '', 
-    //     question: '', 
-    //     answer: '' 
-    // }
-
-    // let emptyFlashcard = {...props.flashcards}
-
-    const [flashcard, setFlashcard] = useState([])
-
-    const [flashcards, setFlashcards] = useState({
+    let emptyFlashcard = {
         subject: '', 
         question: '', 
         answer: '' 
-    })
+    }
+
+    // let emptyFlashcard = {...props.flashcards}
+
+    const [flashcard, setFlashcard] = useState(emptyFlashcard)
+
+    const [flashcards, setFlashcards] = useState([])
 
     // const getFlashcard = () => {
     //     axios.get('http://localhost:8000/api/flashcards')
@@ -31,50 +27,66 @@ export const Edit = (props) => {
     // }
     
     const handleChange = (event) => {
-        setFlashcards({...flashcards, [event.target.name]: event.target.value})
+        setFlashcard({...flashcard, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, id, index) => {
         event.preventDefault()
-        handleUpdate(flashcards)
+        handleUpdate(flashcard, id, index)
     }
 
     const handleDelete = (event, deletedFlashcards) => {
         axios
             .delete('http://localhost:8000/api/flashcards/' + event.target.value)
             .then((response) => {
-              setFlashcard(
+              setFlashcards(
                 flashcards.filter(x => x.id !== deletedFlashcards.id)
               )
             })
       }
 
-    const handleUpdate = (flashcards) => {
-        console.log(flashcards);
+    // Credit to Doots for this crazy janky code!
+    const handleUpdate = (flashcard, id, index) => {
+        // console.log(flashcard);
+        if (flashcard.subject === '') {
+            flashcard.subject = flashcards[index].subject
+        }
+        if (flashcard.question === '') {
+            flashcard.question = flashcards[index].question
+        } 
+        if (flashcard.answer === '') {
+            flashcard.answer = flashcards[index].answer
+        } 
         axios 
-            .put(`http://localhost:8000/api/flashcards/${flashcards.id}`, {
-                subject: flashcards.subject, 
-                question: flashcards.question, 
-                answer: flashcards.answer
+            .put(`http://localhost:8000/api/flashcards/` + id, {
+                subject: flashcard.subject, 
+                question: flashcard.question, 
+                answer: flashcard.answer
             })
             .then(() => {
                 axios.get('http://localhost:8000/api/flashcards')
                 .then((response) => {
-                    setFlashcard(response.data)
+                    setFlashcards(response.data)
             })
       })
     }
+
+    const clearFlashcard = () => {
+        setFlashcard(emptyFlashcard)
+        console.log('test');
+    }
+
+    // onClick={clearFlashcard}
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/flashcards')
         .then((response) => {
             setFlashcards(response.data)
-            setFlashcard(response.data)
         })
     }, [])
 
     
-    const flashcardArray = flashcard.map((flashcard) => {
+    const flashcardArray = flashcards.map((flashcard, index) => {
             return (
                 <div className='flashcard' key={flashcard._id}>
                     <h4>Id: {flashcard.id}</h4>
@@ -91,32 +103,36 @@ export const Edit = (props) => {
                     Delete 
                     </Button>
                 
-                    <details>
-                        <summary>Edit flashcard</summary>
-                        <form onSubmit={handleSubmit}>
+                        <form id='editForm' onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
                             <label htmlFor='subject'>Subject:</label>
                             <input 
                             type="text" 
                             name="subject" 
-                            // value={flashcard.subject} 
+                            defaultValue={flashcard.subject} 
                             onChange={handleChange}/>
                             <br />
                             <label htmlFor='question'>Question:</label>
                             <input 
                             type="text" 
                             name="question" 
-                            // value={flashcard.question} 
+                            defaultValue={flashcard.question} 
                             onChange={handleChange}/>
                             <label htmlFor='answer'>Answer:</label>
                             <input 
                             type="text" 
                             name="answer" 
-                            // value={flashcard.answer} 
+                            defaultValue={flashcard.answer} 
                             onChange={handleChange}/>
                             <br />
-                            <input type='submit' />
+                            <Button type='submit' onclick={clearFlashcard}>Submit</Button>
+                            {/* <Button
+                            type='submit'
+                            form='editForm'
+                            onClick={(event) => {clearFlashcard(event)}}
+                            >
+                            Submit
+                            </Button> */}
                         </form>
-                    </details>
                 </div>
             )
         })

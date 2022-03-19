@@ -78,7 +78,11 @@ export const Home = (props) => {
 
   // ========== Progress Bar stuff ========== //
 
-  const [progress, setProgress] = useState(80)
+  const [progress, setProgress] = useState(30)
+
+  const progressFunction = () => {
+    console.log('test');
+  }
 
   useEffect(() => {
     getFlashcard()
@@ -102,8 +106,18 @@ export const Home = (props) => {
                         <Carousel 
                             className="carousel" 
                             autoPlay={false}
-                            indicators={false}
+                            // indicators={false}
                             navButtonsAlwaysVisible={true}
+                            NavButton = {({onClick, next, prev}) => {
+                              return (
+                                <Button onClick={onClick}>
+                                  {next && "Next"}
+                                  {prev && "Previous"}
+                                </Button>
+                              )
+                            }
+                          }
+                          IndicatorIcon={<LinearProgress />}
                         >
                             {flashcards.map((flashcard)=>{
                             return (
@@ -125,10 +139,11 @@ export const Home = (props) => {
                             )
                             })}
                         </Carousel>
-                        <LinearProgress 
+                        {/* <LinearProgress 
+                            sx={{ "paddingTop": "20px", "margin": "20px" }}
                             variant="determinate"
                             value={progress}
-                        />
+                        /> */}
                     </Typography>
                 </div>
             </Container>
