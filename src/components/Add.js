@@ -16,15 +16,18 @@ const Add = (props) => {
         setFlashcards({ ...flashcards, [event.target.name]: event.target.value });
     };
 
+    const form = document.getElementById("addForm");
+
     const handleSubmit = (event) => {
         event.preventDefault();
         props.handleCreate(flashcards);
+        form.reset();
     };
 
     return (
         <center>
             <h3>Add New Index Card</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="addForm">
                 <TextField label="Subject" name="subject" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
                 <br />
                 <br />

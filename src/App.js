@@ -47,6 +47,7 @@ function App(props) {
                 (err) => console.error(err)
             )
             .catch((error) => console.error(error));
+        console.log(flashcards);
     };
 
     const handleCreate = (addFlashcard) => {
@@ -64,7 +65,9 @@ function App(props) {
     };
 
     const handleUpdate = (editFlashcard) => {
+        console.log(flashcards);
         console.log(editFlashcard);
+
         axios.put("http://localhost:8000/api/flashcards/" + editFlashcard.id, editFlashcard).then((respose) => {
             getFlashcard();
         });
@@ -76,6 +79,7 @@ function App(props) {
 
     useEffect(() => {
         getFlashcard();
+        console.log(flashcards);
     }, []);
 
     const [isFlipped, setIsFlipped] = useState(false);

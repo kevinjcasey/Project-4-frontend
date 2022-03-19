@@ -49,7 +49,7 @@ const App = () => {
 
     useEffect(() => {
         getFlashcard();
-    }, []);
+    });
 
     const handleClick = (e) => {
         e.preventDefault();

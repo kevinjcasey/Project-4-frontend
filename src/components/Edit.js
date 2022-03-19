@@ -6,6 +6,7 @@ const Edit = (props) => {
     const [flashcards, setFlashcards] = useState(emptyflashcard);
 
     const handleChange = (event) => {
+        console.log(event.target.value);
         setFlashcards({ ...flashcards, [event.target.name]: event.target.value });
     };
 
