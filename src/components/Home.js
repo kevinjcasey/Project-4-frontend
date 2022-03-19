@@ -71,7 +71,7 @@ export const Home = (props) => {
     console.log(editFlashcard);
     axios 
         .put('http://localhost:8000/api/flashcards/' + editFlashcard.id, editFlashcard )
-        .then((respose) => {
+        .then((response) => {
           getFlashcard()
         })
   }
@@ -120,7 +120,7 @@ export const Home = (props) => {
                                     >
                                     Delete 
                                     </Button>
-                                    <Link to="/edit">Edit Flashcard</Link>
+                                    
                                 </div>
                             )
                             })}
