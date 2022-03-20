@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const App = () => {
+const AllCards = () => {
     const [flashcards, setFlashcards] = useState([]);
 
     const [isFlipped, setIsFlipped] = useState(false);
@@ -147,4 +147,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AllCards;
