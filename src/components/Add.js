@@ -1,3 +1,5 @@
+
+import App from "../App";
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Home } from './Home'
@@ -12,12 +14,12 @@ import {
 export const Add = () => {
 
     let emptyFlashcard = {
-        subject: '', 
-        question: '', 
-        answer: '' 
-    }
+        subject: "",
+        question: "",
+        answer: "",
+    };
 
-    const [flashcards, setFlashcards] = useState([emptyFlashcard])
+    const [flashcards, setFlashcards] = useState([emptyFlashcard]);
 
     const [open, setOpen] = React.useState(false);
 
@@ -35,8 +37,10 @@ export const Add = () => {
 
 
     const handleChange = (event) => {
-        setFlashcards({...flashcards, [event.target.name]: event.target.value})
-    }
+        setFlashcards({ ...flashcards, [event.target.name]: event.target.value });
+    };
+
+    const form = document.getElementById("addForm");
 
     const handleCreate = (addFlashcard)  => {
         axios
@@ -47,16 +51,17 @@ export const Add = () => {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        handleCreate(flashcards)
-    }
+        event.preventDefault();
+        handleCreate(flashcards);
+        form.reset();
+    };
 
     return (
         <center>
             <br  />
-            <h3>Index Cards On the Flash</h3>
+            <h3>Add New Index Card</h3>
             <br  />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}  id="addForm">
             
                 <TextField
                 label='Subject'
@@ -101,10 +106,10 @@ export const Add = () => {
           Index Card Created
         </Alert>
       </Snackbar>
-
             </form>
+            <br />
         </center>
-    )
-}
+    );
+};
 
-export default Add
+export default Add;

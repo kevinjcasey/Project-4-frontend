@@ -8,7 +8,6 @@ import {
     SendIcon
   } from '@mui/material'
 
-
 export const Edit = (props) => {
 
     let emptyFlashcard = {
