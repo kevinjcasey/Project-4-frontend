@@ -67,18 +67,20 @@ export const Home = (props) => {
 
   const [progress, setProgress] = useState(0)
 
-  const progressFunction = () => {
-    if (flashcards.question == flashcards[1]) {
-      setProgress(progress + 10)
-    } else if (flashcards.question == flashcards[1]) {
-      setProgress(progress + 10)
-    }
-  }
+  // const progressFunction = () => {
+  //   if (flashcards.question == flashcards[0]) {
+  //     setProgress(progress + 10)
+  //   } else if (flashcards.question == flashcards[1]) {
+  //     setProgress(progress + 10)
+  //   }
+  // }
 
   // Need to grab the index of the card displayed --
     // then show a number based on that index
     // if children.index = 2
     // display "in" progress bar '2 out of <children.length>'
+
+    // Try messing around with props inside LinearProgress componenet?
 
   // ============ Card Flip  =============== //
 
@@ -112,13 +114,13 @@ export const Home = (props) => {
       >
         <Toolbar>
             <Typography variant="h6">
-              <Link to='/'>Home</Link>
+              <Link to='/' style={{ textDecoration: 'none', color: 'inherit'}}>Home</Link>
             </Typography>
             <Typography variant="h6">
-              <Link to="/add">Add Flashcard</Link>
+              <Link to="/add" style={{ textDecoration: 'none', color: 'inherit' }}>Add Flashcard</Link>
             </Typography>
             <Typography variant="h6">
-              <Link to="/edit" >View All Flashcards</Link>
+              <Link to="/edit" style={{ textDecoration: 'none', color: 'inherit'}}>View All Flashcards</Link>
             </Typography>
         </Toolbar>
       </AppBar>
@@ -154,7 +156,9 @@ export const Home = (props) => {
               animation="slide"
               duration="400"
               swipe="true"
-              onChange={progressFunction}
+              // index={2}
+              // onChange={progressFunction}
+              // IndicatorIcon={arrayOfNumbers}
               NavButton={({ onClick, className, style, next, prev }) => {
                 return (
                   <Button 
@@ -245,8 +249,6 @@ export const Home = (props) => {
                       value={progress}
                   />
         </Typography>
-        {/* <Add handleCreate={handleCreate} /> */}
-        {/* <AllCards /> */}
       </div>
     </ThemeProvider>
   )
