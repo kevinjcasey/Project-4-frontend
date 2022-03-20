@@ -16,31 +16,44 @@ For Typography:
     -Clear the form on add
 
 
--- Old Edit page --
+-- Edit and AllCard merge -- this is the old Edit.js page --
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { Button } from '@mui/material'
+// ============ MUI components ============ //
+
 import DeleteIcon from '@mui/icons-material/Delete'
+import {
+    Alert,
+    Button,
+    SendIcon,
+    Snackbar,
+    TextField
+  } from '@mui/material'
 
-export const Edit = (props) => {
+export const Edit = () => {
 
-    let emptyflashcard = {...props.flashcard}
+    let emptyFlashcard = {
+        subject: '', 
+        question: '', 
+        answer: '' 
+    }
+
+    const [flashcard, setFlashcard] = useState(emptyFlashcard)
 
     const [flashcards, setFlashcards] = useState([])
 
     const handleChange = (event) => {
-        setFlashcards({...flashcards, [event.target.name]: event.target.value})
+        setFlashcard({...flashcard, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, id, index) => {
         event.preventDefault()
-        handleUpdate(flashcards)
+        handleUpdate(flashcard, id, index)
     }
 
     const handleDelete = (event, deletedFlashcards) => {
-        console.log('hello');
         axios
             .delete('http://localhost:8000/api/flashcards/' + event.target.value)
             .then((response) => {
@@ -48,61 +61,153 @@ export const Edit = (props) => {
                 flashcards.filter(x => x.id !== deletedFlashcards.id)
               )
             })
+        handleClick()
       }
 
-    const handleUpdate = (editFlashcard) => {
+    // Credit to Doots for this crazy, janky code!
+    const handleUpdate = (flashcard, id, index) => {
+        if (flashcard.subject === '') {
+            flashcard.subject = flashcards[index].subject
+        }
+        if (flashcard.question === '') {
+            flashcard.question = flashcards[index].question
+        } 
+        if (flashcard.answer === '') {
+            flashcard.answer = flashcards[index].answer
+        } 
         axios 
-            .put('http://localhost:8000/api/flashcards/' + editFlashcard.id, editFlashcard )
-            .then((response) => {
-              setFlashcards(
-                  flashcards.map((flashcard) => {
-                      return flashcard.id !== editFlashcard.id ? flashcard : response.data
-                  })
-              )
+            .put(`http://localhost:8000/api/flashcards/` + id, {
+                subject: flashcard.subject, 
+                question: flashcard.question, 
+                answer: flashcard.answer
             })
-      }
+            .then(() => {
+                axios.get('http://localhost:8000/api/flashcards')
+                .then((response) => {
+                    setFlashcards(response.data)
+            })
+      })
+    }
+
+    const clearFlashcard = () => {
+        setFlashcard(emptyFlashcard)
+        console.log('test');
+    }
+
+    // ============ SnackBar ================ //
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setOpen(false);
+    };
+
+    // ============ UseEffect ================ //
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/flashcards')
-        .then((response) => setFlashcards(response.data))
+        .then((response) => {
+            setFlashcards(response.data)
+        })
     }, [])
+
+    
+    const flashcardArray = flashcards.map((flashcard, index) => {
+        return (
+            <div className='flashcard' key={flashcard._id}>
+                <h4>Id: {flashcard.id}</h4>
+                <h4>Subject: {flashcard.subject}</h4>
+                <h4>Question: {flashcard.question}</h4>
+                <h4>Answer: {flashcard.answer}</h4>
+                <Button 
+                    onClick={(event) =>{handleDelete(event, flashcard)}} 
+                    value={flashcard.id}
+                    variant="contained"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                >
+                Delete 
+                </Button>
+                {/* ----- SnackBar alert ----- */}
+                <Snackbar 
+                    open={open} 
+                    autoHideDuration={2000} 
+                    onClose={handleClose}
+                >
+                <Alert 
+                    onClose={handleClose} 
+                    severity="error" 
+                    sx={{ width: '100%' }}
+                >
+                Index Card Deleted
+                </Alert>
+                </Snackbar>
+                    <center>
+                    <form id='editForm' onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
+                            
+                            <TextField
+                            label="Subject"
+                            id="standard-size-small"
+                            size="small"
+                            variant="standard"
+                            type="text" 
+                            name="subject" 
+                            value={flashcards.subject} 
+                            onChange={handleChange}
+                            />
+
+                        <TextField
+                            label="Question"
+                            id="standard-size-small"
+                            size="small"
+                            variant="standard"
+                            type="text" 
+                            name="question" 
+                            value={flashcards.question} 
+                            onChange={handleChange}
+                            />
+
+                            <TextField 
+                            label="Answer"
+                            id="filled-size-small"
+                            size="small"
+                            variant="standard"
+                            type="text" 
+                            name="answer" 
+                            value={flashcards.answer} 
+                            onChange={handleChange}
+                            />
+                            <br />  
+                            
+                        <br />
+                        <Button 
+                        type='submit' 
+                        onclick={clearFlashcard}
+                        variant="contained"
+                        color="success"
+                        >Submit</Button>
+                        
+                    </form>
+                    </center>
+            </div>
+        )
+    })
 
     return (
         <>
-        {flashcards.map((flashcard) => {
-            return (
-                <div className='flashcard' key={flashcard.id}>
-                    <h4>Subject: {flashcard.subject}</h4>
-                    <h4>Question: {flashcard.question}</h4>
-                    <h4>Answer: {flashcard.answer}</h4>
-                    <Button 
-                        onClick={(event) =>{handleDelete(event, flashcard)}} 
-                        value={flashcard.id}
-                        variant="contained"
-                        color="error"
-                        startIcon={<DeleteIcon />}
-                    >
-                    Delete 
-                    </Button>
-                    <details>
-                        <summary>Edit flashcard</summary>
-                        <form onSubmit={handleSubmit}>
-                            <label htmlFor='subject'>Subject:</label>
-                            <input type="text" name="subject" value={flashcard.subject} onChange={handleChange}/>
-                            <br />
-                            <label htmlFor='question'>Question:</label>
-                            <input type="text" name="question" value={flashcard.question} onChange={handleChange}/>
-                            <label htmlFor='answer'>Answer:</label>
-                            <input type="text" name="answer" value={flashcard.answer} onChange={handleChange}/>
-                            <br />
-                            <input type='submit' />
-                        </form>
-                    </details>
-                </div>
-            )
-        })}
+        {flashcardArray}
         </>
-    )
+    )   
 }
+
+export default Edit
+
 
 

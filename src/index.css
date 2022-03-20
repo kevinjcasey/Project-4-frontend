@@ -13,8 +13,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: linear-gradient( 359.3deg,  rgba(196,214,252,1) 1%, rgba(187,187,187,0) 70.9% );
-  height:   1000px;
-  }
+  /* This drops it for all pages */
+  height: 2000px; 
+}
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -26,8 +27,14 @@ code {
   background-size: cover; */
   padding-bottom: 100px;
 background-image: linear-gradient( 178deg,  rgba(201,234,252,0.51) 14.9%, rgba(139,192,216,0.73) 80% );
+}
 
-  
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
 
+.toolbar a {
+  color: black;
 }
 
