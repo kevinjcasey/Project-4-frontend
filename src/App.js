@@ -1,14 +1,35 @@
-import React, { useState, useEffect } from "react";
+
+import { Routes, Route } from 'react-router-dom'
+import { Home } from './components/Home'
+import { Add } from './components/Add'
+import { Edit } from './components/Edit'
+
+function App(props) {
+
+return (
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='add' element={<Add />}/>
+      <Route path='edit' element={<Edit />}/>
+    </Routes>
+  )
+  
+// ============= Everything below is Kris branch ============== //
+
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Add from './components/Add'
+import Edit from './components/Edit'
+
 import "/Users/angelvalentin/dev/Unit Projects/unit-4-frontend/Project-4-frontend/src/App.css";
-import axios from "axios";
-import Add from "./components/Add";
-import Edit from "./components/Edit";
+
 import AllCards from "./components/AllCards";
 
-import { Button, LinearProgress, Container, Typography, AppBar, Card, CardActions, CardContent, Toolbar } from "@mui/material";
+import { Button, LinearProgress, Container, Typography, AppBar, Card, CardActions, CardContent, Toolbar, Snackbar, IconButton, Alert } from "@mui/material";
 import ReactCardFlip from "react-card-flip";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+
 
 // ========== MUI Carousel =========== //
 
@@ -36,67 +57,111 @@ const theme = createTheme({
 });
 // ========== ^^MUI Theme stuff^^ ========= //
 
+
+
+
+
+
+
+   
+    
+
+
+   
+
+
+
+
+
+
+
+
+
 function App(props) {
-    const [flashcards, setFlashcards] = useState([]);
 
-    const getFlashcard = () => {
-        axios
-            .get("http://localhost:8000/api/flashcards")
-            .then(
-                (response) => setFlashcards(response.data),
-                (err) => console.error(err)
-            )
-            .catch((error) => console.error(error));
-        console.log(flashcards);
-    };
 
-    const handleCreate = (addFlashcard) => {
-        axios.post("http://localhost:8000/api/flashcards", addFlashcard).then((response) => {
+  const [flashcards, setFlashcards] = useState([])
+
+  const getFlashcard = () => {
+    axios
+         .get('http://localhost:8000/api/flashcards')
+         .then(
+           (response) => setFlashcards(response.data),
+           (err) => console.error(err)
+         )
+         .catch((error) => console.error(error))
+  }
+  const handleCreate = (addFlashcard) => {
+    axios
+         .post('http://localhost:8000/api/flashcards', addFlashcard)
+         .then((response)=> {
             console.log(response);
-            getFlashcard();
-        });
-    };
+            getFlashcard()
+         })
+}
 
-    const handleDelete = (event, deletedFlashcards) => {
-        axios.delete("http://localhost:8000/api/flashcards/" + event.target.value).then((response) => {
-            setFlashcards(flashcards.filter((x) => x.id !== deletedFlashcards.id));
-            // getFlashcard();
-        });
-    };
+  const handleDelete = (event, deletedFlashcards) => {
+    axios
+        .delete('http://localhost:8000/api/flashcards/' + event.target.value)
+        .then((response) => {
+          setFlashcards(
+            flashcards.filter(x => x.id !== deletedFlashcards.id)
+          )
+            handleClick()
 
-    const handleUpdate = (editFlashcard) => {
-        console.log(flashcards);
-        console.log(editFlashcard);
+        })
+  }
 
-        axios.put("http://localhost:8000/api/flashcards/" + editFlashcard.id, editFlashcard).then((respose) => {
-            getFlashcard();
-        });
-    };
+  const handleUpdate = (editFlashcard) => {
+    console.log(editFlashcard);
+    axios 
+        .put('http://localhost:8000/api/flashcards/' + editFlashcard.id, editFlashcard )
+        .then((respose) => {
+          getFlashcard()
+        })
+  }
 
-    // ========== Progress Bar stuff ========== //
+  // ========== Progress Bar stuff ========== //
 
-    const [progress, setProgress] = useState(80);
+  const [progress, setProgress] = useState(80)
+  // ======================================== //
+  const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        getFlashcard();
-        console.log(flashcards);
-    }, []);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setOpen(false);
+  };
+  
+  // ========== ^^SnackBar^^================= //
 
+  
     const [isFlipped, setIsFlipped] = useState(false);
 
     const closeDetails = () => {
         document.getElementById("details").removeAttribute("open");
     };
 
-    const handleClick = (e) => {
+    const handleFlip= (e) => {
         e.preventDefault();
         setIsFlipped(!isFlipped);
         closeDetails();
     };
 
-    return (
-        <ThemeProvider theme={theme}>
-            <AppBar id="AppBar" position="relative" gutterBottom>
+  useEffect(() => {
+    getFlashcard()
+  }, [])
+
+  return (
+    <ThemeProvider theme={theme}>
+      <AppBar id="AppBar" position="relative" gutterBottom>
+
                 <Toolbar>
                     <Typography variant="h6">Home</Typography>
                 </Toolbar>
@@ -107,6 +172,7 @@ function App(props) {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
                 Index Cards On the Flash
             </Typography>
+
             <Container>
                 <div className="flashcards">
                     <Typography variant="h6" color="primary" align="center">
@@ -154,8 +220,13 @@ function App(props) {
                                                         >
                                                             Delete
                                                         </Button>
+                                                        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                                                          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                                                            Index Card Deleted
+                                                          </Alert>
+                                                        </Snackbar>
                                                         <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
-                                                        <Button variant="contained" size="large" color="primary" onClick={handleClick}>
+                                                        <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
                                                             Flip
                                                         </Button>
                                                     </div>
@@ -173,7 +244,7 @@ function App(props) {
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions className="CardAction">
-                                                        <Button variant="contained" size="medium" color="primary" onClick={handleClick}>
+                                                        <Button variant="contained" size="medium" color="primary" onClick={handleFlip}>
                                                             Flip
                                                         </Button>
                                                     </CardActions>
