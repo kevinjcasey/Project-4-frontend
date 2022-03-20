@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { 
+    TextField ,
+    Button,
+    SendIcon
+  } from '@mui/material'
+
 
 export const Edit = (props) => {
 
@@ -102,37 +107,56 @@ export const Edit = (props) => {
                     >
                     Delete 
                     </Button>
-                
+                        <center>
                         <form id='editForm' onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
-                            <label htmlFor='subject'>Subject:</label>
-                            <input 
-                            type="text" 
-                            name="subject" 
-                            defaultValue={flashcard.subject} 
-                            onChange={handleChange}/>
+                              
+                             <TextField
+                              label="Subject"
+                              id="standard-size-small"
+                              defaultValue="Small"
+                              size="small"
+                              variant="standard"
+                              type="text" 
+                              name="subject" 
+                              value={flashcards.subject} 
+                              onChange={handleChange}
+                             />
+
+                            <TextField
+                              label="Question"
+                              id="standard-size-small"
+                              defaultValue="Small"
+                              size="small"
+                              variant="standard"
+                              type="text" 
+                              name="question" 
+                              value={flashcards.question} 
+                              onChange={handleChange}
+                               />
+
+                             <TextField 
+                               label="Answer"
+                               id="filled-size-small"
+                               defaultValue="Small"
+                               size="small"
+                               variant="standard"
+                               type="text" 
+                               name="answer" 
+                               value={flashcards.answer} 
+                               onChange={handleChange}
+                             />
+                             <br />  
+                              
                             <br />
-                            <label htmlFor='question'>Question:</label>
-                            <input 
-                            type="text" 
-                            name="question" 
-                            defaultValue={flashcard.question} 
-                            onChange={handleChange}/>
-                            <label htmlFor='answer'>Answer:</label>
-                            <input 
-                            type="text" 
-                            name="answer" 
-                            defaultValue={flashcard.answer} 
-                            onChange={handleChange}/>
-                            <br />
-                            <Button type='submit' onclick={clearFlashcard}>Submit</Button>
-                            {/* <Button
-                            type='submit'
-                            form='editForm'
-                            onClick={(event) => {clearFlashcard(event)}}
-                            >
-                            Submit
-                            </Button> */}
+                            <Button 
+                            type='submit' 
+                            onclick={clearFlashcard}
+                            variant="contained"
+                            color="success"
+                            >Submit</Button>
+                            
                         </form>
+                        </center>
                 </div>
             )
         })
@@ -141,8 +165,7 @@ export const Edit = (props) => {
         <>
         {flashcardArray}
         </>
-    )
-    
+    )   
 }
 
 export default Edit

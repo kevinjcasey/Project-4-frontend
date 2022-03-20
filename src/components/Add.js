@@ -3,7 +3,10 @@ import axios from 'axios'
 import { Home } from './Home'
 import { 
     Button, 
-    TextField
+    IconButton, 
+    Snackbar, 
+    TextField,
+    Alert
   } from '@mui/material'
 
 export const Add = () => {
@@ -15,6 +18,21 @@ export const Add = () => {
     }
 
     const [flashcards, setFlashcards] = useState([emptyFlashcard])
+
+    const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
     const handleChange = (event) => {
         setFlashcards({...flashcards, [event.target.name]: event.target.value})
@@ -35,7 +53,9 @@ export const Add = () => {
 
     return (
         <center>
+            <br  />
             <h3>Index Cards On the Flash</h3>
+            <br  />
             <form onSubmit={handleSubmit}>
             
                 <TextField
@@ -68,12 +88,20 @@ export const Add = () => {
                 <br />
                 <br />
 
-                <Button
-                type='submit'
-                variant="contained"
-                color="success"
-                >Submit
-                </Button>
+
+            <Button
+            type='submit'
+            variant="contained"
+            color="success"
+            onClick={handleClick}
+            >Submit
+            </Button>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Index Card Created
+        </Alert>
+      </Snackbar>
+
             </form>
         </center>
     )
