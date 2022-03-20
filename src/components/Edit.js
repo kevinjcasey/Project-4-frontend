@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+// ============ MUI components ============ //
+
 import DeleteIcon from '@mui/icons-material/Delete'
-import { 
-    TextField ,
+import {
+    Alert,
     Button,
-    SendIcon
+    SendIcon,
+    Snackbar,
+    TextField
   } from '@mui/material'
 
-export const Edit = (props) => {
+export const Edit = () => {
 
     let emptyFlashcard = {
         subject: '', 
@@ -16,20 +20,10 @@ export const Edit = (props) => {
         answer: '' 
     }
 
-    // let emptyFlashcard = {...props.flashcards}
-
     const [flashcard, setFlashcard] = useState(emptyFlashcard)
 
     const [flashcards, setFlashcards] = useState([])
 
-    // const getFlashcard = () => {
-    //     axios.get('http://localhost:8000/api/flashcards')
-    //     .then((response) => {
-    //         setFlashcards(response.data)
-    //         console.log(response.data);
-    //     })
-    // }
-    
     const handleChange = (event) => {
         setFlashcard({...flashcard, [event.target.name]: event.target.value})
     }
@@ -47,11 +41,11 @@ export const Edit = (props) => {
                 flashcards.filter(x => x.id !== deletedFlashcards.id)
               )
             })
+        handleClick()
       }
 
-    // Credit to Doots for this crazy janky code!
+    // Credit to Doots for this crazy, janky code!
     const handleUpdate = (flashcard, id, index) => {
-        // console.log(flashcard);
         if (flashcard.subject === '') {
             flashcard.subject = flashcards[index].subject
         }
@@ -80,7 +74,22 @@ export const Edit = (props) => {
         console.log('test');
     }
 
-    // onClick={clearFlashcard}
+    // ============ SnackBar ================ //
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setOpen(false);
+    };
+
+    // ============ UseEffect ================ //
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/flashcards')
@@ -91,71 +100,85 @@ export const Edit = (props) => {
 
     
     const flashcardArray = flashcards.map((flashcard, index) => {
-            return (
-                <div className='flashcard' key={flashcard._id}>
-                    <h4>Id: {flashcard.id}</h4>
-                    <h4>Subject: {flashcard.subject}</h4>
-                    <h4>Question: {flashcard.question}</h4>
-                    <h4>Answer: {flashcard.answer}</h4>
-                    <Button 
-                        onClick={(event) =>{handleDelete(event, flashcard)}} 
-                        value={flashcard.id}
-                        variant="contained"
-                        color="error"
-                        startIcon={<DeleteIcon />}
-                    >
-                    Delete 
-                    </Button>
-                        <center>
-                        <form id='editForm' onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
-                              
-                             <TextField
-                              label="Subject"
-                              id="standard-size-small"
-                              size="small"
-                              variant="standard"
-                              type="text" 
-                              name="subject" 
-                              value={flashcards.subject} 
-                              onChange={handleChange}
-                             />
-
-                            <TextField
-                              label="Question"
-                              id="standard-size-small"
-                              size="small"
-                              variant="standard"
-                              type="text" 
-                              name="question" 
-                              value={flashcards.question} 
-                              onChange={handleChange}
-                               />
-
-                             <TextField 
-                               label="Answer"
-                               id="filled-size-small"
-                               size="small"
-                               variant="standard"
-                               type="text" 
-                               name="answer" 
-                               value={flashcards.answer} 
-                               onChange={handleChange}
-                             />
-                             <br />  
-                              
-                            <br />
-                            <Button 
-                            type='submit' 
-                            onclick={clearFlashcard}
-                            variant="contained"
-                            color="success"
-                            >Submit</Button>
+        return (
+            <div className='flashcard' key={flashcard._id}>
+                <h4>Id: {flashcard.id}</h4>
+                <h4>Subject: {flashcard.subject}</h4>
+                <h4>Question: {flashcard.question}</h4>
+                <h4>Answer: {flashcard.answer}</h4>
+                <Button 
+                    onClick={(event) =>{handleDelete(event, flashcard)}} 
+                    value={flashcard.id}
+                    variant="contained"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                >
+                Delete 
+                </Button>
+                {/* ----- SnackBar alert ----- */}
+                <Snackbar 
+                    open={open} 
+                    autoHideDuration={2000} 
+                    onClose={handleClose}
+                >
+                <Alert 
+                    onClose={handleClose} 
+                    severity="error" 
+                    sx={{ width: '100%' }}
+                >
+                Index Card Deleted
+                </Alert>
+                </Snackbar>
+                    <center>
+                    <form id='editForm' onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
                             
-                        </form>
-                        </center>
-                </div>
-            )
-        })
+                            <TextField
+                            label="Subject"
+                            id="standard-size-small"
+                            size="small"
+                            variant="standard"
+                            type="text" 
+                            name="subject" 
+                            value={flashcards.subject} 
+                            onChange={handleChange}
+                            />
+
+                        <TextField
+                            label="Question"
+                            id="standard-size-small"
+                            size="small"
+                            variant="standard"
+                            type="text" 
+                            name="question" 
+                            value={flashcards.question} 
+                            onChange={handleChange}
+                            />
+
+                            <TextField 
+                            label="Answer"
+                            id="filled-size-small"
+                            size="small"
+                            variant="standard"
+                            type="text" 
+                            name="answer" 
+                            value={flashcards.answer} 
+                            onChange={handleChange}
+                            />
+                            <br />  
+                            
+                        <br />
+                        <Button 
+                        type='submit' 
+                        onclick={clearFlashcard}
+                        variant="contained"
+                        color="success"
+                        >Submit</Button>
+                        
+                    </form>
+                    </center>
+            </div>
+        )
+    })
 
     return (
         <>

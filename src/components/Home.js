@@ -77,7 +77,6 @@ export const Home = (props) => {
           setFlashcards(
             flashcards.filter(x => x.id !== deletedFlashcards.id)
           )
-          handleClick()
         })
   }
 
@@ -88,21 +87,6 @@ export const Home = (props) => {
   const progressFunction = () => {
     console.log('test');
   }
-
-  // ============ SnackBar ================ //
-
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-  
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
 
   // ============ Card Flip  =============== //
 
@@ -214,30 +198,6 @@ export const Home = (props) => {
                           {flashcard.question}
                           </Typography>
                           <div className="CardAction">
-                            <Button
-                              onClick={ (event) => { handleDelete(event, flashcard) } }
-                              value={flashcard.id}
-                              variant="contained"
-                              color="error"
-                              size="large"
-                              startIcon={<DeleteIcon />}
-                            >
-                            Delete
-                            </Button>
-                            {/* ----- SnackBar alert ----- */}
-                            <Snackbar 
-                              open={open} 
-                              autoHideDuration={2000} 
-                              onClose={handleClose}
-                            >
-                            <Alert 
-                              onClose={handleClose} 
-                              severity="error" 
-                              sx={{ width: '100%' }}
-                            >
-                            Index Card Deleted
-                            </Alert>
-                            </Snackbar>
                             {/* ---- Flip button ---- */}
                             <Button 
                               variant="contained" 
