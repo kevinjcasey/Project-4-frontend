@@ -53,7 +53,6 @@ export const Home = (props) => {
 
   const [flashcards, setFlashcards] = useState([])
 
-  
   const getFlashcard = () => {
     axios
          .get('http://localhost:8000/api/flashcards')
@@ -66,10 +65,14 @@ export const Home = (props) => {
 
   // =========== Progress Bar =========== //
 
-  const [progress, setProgress] = useState(-10)
+  const [progress, setProgress] = useState(0)
 
   const progressFunction = () => {
-    setProgress(progress + 10)
+    if (flashcards.question == flashcards[1]) {
+      setProgress(progress + 10)
+    } else if (flashcards.question == flashcards[1]) {
+      setProgress(progress + 10)
+    }
   }
 
   // Need to grab the index of the card displayed --
@@ -82,15 +85,16 @@ export const Home = (props) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const closeDetails = () => {
-      document.getElementById("details").removeAttribute("open");
+      document.getElementById("details")
+      // .removeAttribute("open"); // This was throwing a warning
   };
 
   const handleFlip= (e) => {
       e.preventDefault();
       setIsFlipped(!isFlipped);
       closeDetails();
-  };
-
+  }
+  
   // =========== UseEffect ========== //
 
   useEffect(() => {
@@ -104,8 +108,7 @@ export const Home = (props) => {
     {/* ----- Nav Bar ----- */}
       <AppBar 
         id="AppBar" 
-        position="relative" 
-        gutterBottom
+        position="relative"
       >
         <Toolbar>
             <Typography variant="h6">
@@ -146,7 +149,7 @@ export const Home = (props) => {
             <Carousel
               className="carousel"
               autoPlay={false}
-              indicators={false}
+              indicators={true}
               navButtonsAlwaysVisible={true}
               animation="slide"
               duration="400"
@@ -164,7 +167,7 @@ export const Home = (props) => {
                 );
               }}
             >
-              {flashcards.map((flashcard) => {
+              {flashcards.map((flashcard, index) => {
                 return (
                   <div className="flashcard" key={flashcard.id}>
                     <ReactCardFlip 
@@ -210,7 +213,6 @@ export const Home = (props) => {
                               marginBottom="80px" 
                               variant="h3"
                             >
-                            Answer
                             </Typography>
                             <Typography 
                               variant="h4" 
