@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Add from './Add'
-import Edit from './Edit'
 
 // ============ MUI components ============ //
 
 import '/Users/kevinjcasey/Desktop/Project-4-frontend/Project-4-frontend/src/App.css'
 import { 
-  Alert,
   AppBar, 
   Button, 
   Card, 
   CardActions, 
-  CardContent, 
-  Container, 
-  IconButton,
+  CardContent,
   LinearProgress, 
-  Snackbar,
   Toolbar, 
   Typography,
    } from "@mui/material"
@@ -70,23 +64,18 @@ export const Home = (props) => {
          .catch((error) => console.error(error))
   }
 
-  const handleDelete = (event, deletedFlashcards) => {
-    axios
-        .delete('http://localhost:8000/api/flashcards/' + event.target.value)
-        .then((response) => {
-          setFlashcards(
-            flashcards.filter(x => x.id !== deletedFlashcards.id)
-          )
-        })
-  }
-
   // =========== Progress Bar =========== //
 
-  const [progress, setProgress] = useState(30)
+  const [progress, setProgress] = useState(-10)
 
   const progressFunction = () => {
-    console.log('test');
+    setProgress(progress + 10)
   }
+
+  // Need to grab the index of the card displayed --
+    // then show a number based on that index
+    // if children.index = 2
+    // display "in" progress bar '2 out of <children.length>'
 
   // ============ Card Flip  =============== //
 
@@ -162,10 +151,11 @@ export const Home = (props) => {
               animation="slide"
               duration="400"
               swipe="true"
+              onChange={progressFunction}
               NavButton={({ onClick, className, style, next, prev }) => {
                 return (
                   <Button 
-                    onClick={onClick} 
+                    onClick={onClick}
                     className={className} 
                     style={style}>
                     {next && "Next"}
@@ -233,7 +223,7 @@ export const Home = (props) => {
                           <CardActions className="CardAction">
                             <Button 
                               variant="contained" 
-                              size="medium" 
+                              size="large" 
                               color="primary" 
                               onClick={handleFlip}
                             >
@@ -247,11 +237,11 @@ export const Home = (props) => {
                 );
               })}
             </Carousel>
-                  {/* <LinearProgress 
+                  <LinearProgress 
                       sx={{ "paddingTop": "20px", "margin": "20px" }}
                       variant="determinate"
                       value={progress}
-                  /> */}
+                  />
         </Typography>
         {/* <Add handleCreate={handleCreate} /> */}
         {/* <AllCards /> */}

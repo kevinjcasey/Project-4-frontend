@@ -52,20 +52,10 @@ import {
 
 export const Edit = () => {
 
-    // ======== Card Flip stuff ========= //
-    const [isFlipped, setIsFlipped] = useState(false);
-
-    const handleFlip = (e) => {
-            e.preventDefault();
-            setIsFlipped(!isFlipped);
-        };
-
-    // ================================== //
-
     let emptyFlashcard = {
         subject: '', 
         question: '', 
-        answer: '' 
+        answer: ''
     }
 
     const [flashcard, setFlashcard] = useState(emptyFlashcard)
