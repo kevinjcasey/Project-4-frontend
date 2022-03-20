@@ -1,71 +1,115 @@
-import axios from 'axios'
+
+import App from "../App";
 import React, { useState, useEffect } from 'react'
-import App from '../App'
-import {
-    Button,
-    TextField
+import axios from 'axios'
+import { Home } from './Home'
+import { 
+    Button, 
+    IconButton, 
+    Snackbar, 
+    TextField,
+    Alert
   } from '@mui/material'
 
-const Add = (props) => {
-    let emptyflashcard = {subject: '' , question: '', answer: '' }
+export const Add = () => {
 
-    const [flashcards, setFlashcards] = useState([emptyflashcard])
+    let emptyFlashcard = {
+        subject: "",
+        question: "",
+        answer: "",
+    };
+
+    const [flashcards, setFlashcards] = useState([emptyFlashcard]);
+
+    const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
     const handleChange = (event) => {
-        setFlashcards({...flashcards, [event.target.name]: event.target.value})
+        setFlashcards({ ...flashcards, [event.target.name]: event.target.value });
+    };
+
+    const form = document.getElementById("addForm");
+
+    const handleCreate = (addFlashcard)  => {
+        axios
+             .post('http://localhost:8000/api/flashcards', addFlashcard)
+             .then((response)=> {
+                setFlashcards([response.data])
+        })
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        props.handleCreate(flashcards)
-    }
+        event.preventDefault();
+        handleCreate(flashcards);
+        form.reset();
+    };
 
-    
-
-    
-
-    return(
-    <>
+    return (
         <center>
-           <h3>Index Cards On the Flash</h3>
-           <form onSubmit={handleSubmit}>
-            <label htmlFor='subject'></label>
-            <TextField
-             label="Subject"
-             id="outlined-size-small"
-             size="small"
-             name='subject'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            <label htmlFor='question' ></label>
-            <TextField
-            label="Question"
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            name='question'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            <label htmlFor='answer'></label>
-            <TextField
-            label="Answer"
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            name='answer'
-            onChange={handleChange}/>
-            <br />
-            <br />
+            <br  />
+            <h3>Add New Index Card</h3>
+            <br  />
+            <form onSubmit={handleSubmit}  id="addForm">
+            
+                <TextField
+                label='Subject'
+                name='subject'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+                
+                <TextField
+                label='Question'
+                name='question'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+                
+                <TextField
+                label='Answer'
+                name='answer'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+
+
             <Button
             type='submit'
             variant="contained"
             color="success"
-            >submit
+            onClick={handleClick}
+            >Submit
             </Button>
-        </form></center>
-    </>
-    )
-}
-    export default Add
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Index Card Created
+        </Alert>
+      </Snackbar>
+            </form>
+            <br />
+        </center>
+    );
+};
+
+export default Add;
