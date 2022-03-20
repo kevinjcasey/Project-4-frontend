@@ -4,7 +4,7 @@ import { Home } from './components/Home'
 import { Add } from './components/Add'
 import { Edit } from './components/Edit'
 
-function App(props) {
+function App() {
 
 return (
     <Routes>
