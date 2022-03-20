@@ -112,7 +112,6 @@ export const Edit = (props) => {
                              <TextField
                               label="Subject"
                               id="standard-size-small"
-                              defaultValue="Small"
                               size="small"
                               variant="standard"
                               type="text" 
@@ -124,7 +123,6 @@ export const Edit = (props) => {
                             <TextField
                               label="Question"
                               id="standard-size-small"
-                              defaultValue="Small"
                               size="small"
                               variant="standard"
                               type="text" 
@@ -136,7 +134,6 @@ export const Edit = (props) => {
                              <TextField 
                                label="Answer"
                                id="filled-size-small"
-                               defaultValue="Small"
                                size="small"
                                variant="standard"
                                type="text" 

@@ -81,15 +81,6 @@ export const Home = (props) => {
         })
   }
 
-  const handleUpdate = (editFlashcard) => {
-    console.log(editFlashcard);
-    axios 
-        .put('http://localhost:8000/api/flashcards/' + editFlashcard.id, editFlashcard )
-        .then((response) => {
-          getFlashcard()
-        })
-  }
-
   // =========== Progress Bar =========== //
 
   const [progress, setProgress] = useState(30)
@@ -127,7 +118,7 @@ export const Home = (props) => {
       closeDetails();
   };
 
-  // ============= UseEffect ========== //
+  // =========== UseEffect ========== //
 
   useEffect(() => {
     getFlashcard()
@@ -207,7 +198,8 @@ export const Home = (props) => {
                       flipDirection="vertical" 
                       spacing={4}
                     >
-                      <div /* Front of card */>
+                      {/* --- Front of card --- */ }
+                      <div>
                         <Card className="Card1">
                           <Typography 
                             gutterBottom padding="30px" 
@@ -232,49 +224,77 @@ export const Home = (props) => {
                             >
                             Delete
                             </Button>
-                            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-                              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                                Index Card Deleted
-                              </Alert>
+                            {/* ----- SnackBar alert ----- */}
+                            <Snackbar 
+                              open={open} 
+                              autoHideDuration={2000} 
+                              onClose={handleClose}
+                            >
+                            <Alert 
+                              onClose={handleClose} 
+                              severity="error" 
+                              sx={{ width: '100%' }}
+                            >
+                            Index Card Deleted
+                            </Alert>
                             </Snackbar>
-                            <Edit handleUpdate={handleUpdate} flashcard={flashcard} />
-                            <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
-                                Flip
+                            {/* ---- Flip button ---- */}
+                            <Button 
+                              variant="contained" 
+                              size="large" 
+                              color="primary" 
+                              onClick={handleFlip}
+                            >
+                            Flip
                             </Button>
                           </div>
                         </Card>
                       </div>
-
-                      <div /*Back of card*/>
-                          <Card className="Card1">
-                              <CardContent>
-                                  <Typography gutterBottom paddingTop="20px" marginBottom="80px" variant="h3">
-                                      Answer
-                                  </Typography>
-                                  <Typography variant="h4" marginBottom="30px" padding="50px">
-                                      {flashcard.answer}
-                                  </Typography>
-                              </CardContent>
-                              <CardActions className="CardAction">
-                                  <Button variant="contained" size="medium" color="primary" onClick={handleFlip}>
-                                      Flip
-                                  </Button>
-                              </CardActions>
-                          </Card>
+                      {/* --- Back of card --- */}
+                      <div>
+                        <Card className="Card1">
+                          <CardContent>
+                            <Typography 
+                              gutterBottom 
+                              paddingTop="20px" 
+                              marginBottom="80px" 
+                              variant="h3"
+                            >
+                            Answer
+                            </Typography>
+                            <Typography 
+                              variant="h4" 
+                              marginBottom="30px" 
+                              padding="50px"
+                            >
+                            {flashcard.answer}
+                            </Typography>
+                          </CardContent>
+                          <CardActions className="CardAction">
+                            <Button 
+                              variant="contained" 
+                              size="medium" 
+                              color="primary" 
+                              onClick={handleFlip}
+                            >
+                            Flip
+                            </Button>
+                          </CardActions>
+                        </Card>
                       </div>
                     </ReactCardFlip>
                   </div>
                 );
               })}
-                  </Carousel>
+            </Carousel>
                   {/* <LinearProgress 
                       sx={{ "paddingTop": "20px", "margin": "20px" }}
                       variant="determinate"
                       value={progress}
                   /> */}
         </Typography>
-      {/* <Add handleCreate={handleCreate} /> */}
-      {/* <AllCards /> */}
+        {/* <Add handleCreate={handleCreate} /> */}
+        {/* <AllCards /> */}
       </div>
     </ThemeProvider>
   )
