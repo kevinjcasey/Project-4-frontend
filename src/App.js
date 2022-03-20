@@ -1,3 +1,20 @@
+import { Routes, Route } from 'react-router-dom'
+import { Home } from './components/Home'
+import { Add } from './components/Add'
+import { Edit } from './components/Edit'
+
+function App(props) {
+
+return (
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='add' element={<Add />}/>
+      <Route path='edit' element={<Edit />}/>
+    </Routes>
+  )
+  
+// ============= Everything below is Kris branch ============== //
+
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/Add'
@@ -45,7 +62,9 @@ const theme = createTheme({
 
 
 
+
 function App(props) {
+
 
   const [flashcards, setFlashcards] = useState([])
 
@@ -183,6 +202,7 @@ function App(props) {
     </ThemeProvider>
 
   );
+
 }
 
 export default App;

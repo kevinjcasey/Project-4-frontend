@@ -1,6 +1,6 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import App from '../App'
+import axios from 'axios'
+import { Home } from './Home'
 import { 
     Button, 
     IconButton, 
@@ -9,7 +9,7 @@ import {
     Alert
   } from '@mui/material'
 
-const Add = (props) => {
+export const Add = () => {
 
     let emptyFlashcard = {
         subject: '', 
@@ -38,47 +38,56 @@ const Add = (props) => {
         setFlashcards({...flashcards, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        props.handleCreate(flashcards)
+    const handleCreate = (addFlashcard)  => {
+        axios
+             .post('http://localhost:8000/api/flashcards', addFlashcard)
+             .then((response)=> {
+                setFlashcards([response.data])
+        })
     }
 
-    return(
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        handleCreate(flashcards)
+    }
+
+    return (
         <center>
             <br  />
             <h3>Index Cards On the Flash</h3>
             <br  />
             <form onSubmit={handleSubmit}>
             
-            <TextField
-            label='Subject'
-            name='subject'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            
-            <TextField
-            label='Question'
-            name='question'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
-            
-            <TextField
-            label='Answer'
-            name='answer'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}/>
-            <br />
-            <br />
+                <TextField
+                label='Subject'
+                name='subject'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+                
+                <TextField
+                label='Question'
+                name='question'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+                
+                <TextField
+                label='Answer'
+                name='answer'
+                id="outlined-size-small"
+                size="small"
+                type='text'
+                onChange={handleChange}/>
+                <br />
+                <br />
+
 
             <Button
             type='submit'
@@ -93,7 +102,6 @@ const Add = (props) => {
         </Alert>
       </Snackbar>
 
-          
             </form>
         </center>
     )
