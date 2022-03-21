@@ -106,7 +106,7 @@ export const Add = () => {
     const form = document.getElementById("addForm");
 
     const handleCreate = (addFlashcard) => {
-        axios.post("http://localhost:8000/api/flashcards", addFlashcard).then((response) => {
+        axios.post("https://flashcards-backend-ga.herokuapp.com/api/flashcards", addFlashcard).then((response) => {
             setFlashcards([response.data]);
         });
     };

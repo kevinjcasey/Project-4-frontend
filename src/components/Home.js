@@ -93,7 +93,22 @@ export const Home = (props) => {
 
     const classes = useStyles();
 
-    const [flashcards, setFlashcards] = useState([]);
+
+
+
+  const [flashcards, setFlashcards] = useState([]);
+
+
+  const getFlashcard = () => {
+    axios
+         .get('https://flashcards-backend-ga.herokuapp.com/api/flashcards')
+         .then(
+           (response) => setFlashcards(response.data),
+           (err) => console.error(err)
+         )
+         .catch((error) => console.error(error))
+  }
+
 
     const getFlashcard = () => {
         axios
@@ -172,6 +187,7 @@ export const Home = (props) => {
                     </Typography>
                 </Toolbar>
             </AppBar>
+
             {/* ----- App Name and Slogan ----- */}
             <Typography variant="h2" align="center" color="textPrimary">
                 FlashPrep
@@ -250,6 +266,7 @@ export const Home = (props) => {
                         <LinearProgress id="progressBar" sx={{ paddingTop: "20px", margin: "20px" }} variant="determinate" value={progress} />
                     </div>
                 </Typography>
+\
             </div>
             <AppBar id="AppBar" position="fixed" className="app" sx={{ top: "auto", bottom: -40 }}>
                 <Toolbar className="footer">
