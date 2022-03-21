@@ -34,7 +34,13 @@ code {
   justify-content: space-between;
 }
 
-.toolbar a {
-  color: black;
+/* ============ Footer CSS =========== */
+
+.footer{
+  display: flex;
+  justify-content: space-between;
 }
 
+.footer a {
+  color: inherit;
+}

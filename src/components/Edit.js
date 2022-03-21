@@ -9,6 +9,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import PreviewIcon from '@mui/icons-material/Preview'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 import {
     Alert,
@@ -335,22 +337,31 @@ export const Edit = () => {
           </Toolbar>
         </AppBar>
         {flashcardArray}
-        <footer className={classes.footer}>
-          <Typography 
-            variant="h6" 
-            align="center" 
-            gutterBottom
-          >
-          Footer
-          </Typography>
-          <Typography 
-            variant="subtitle1" 
-            align="center" 
-            color="textSecondary"
-          >
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
-          </Typography>
-        </footer>
+        <AppBar
+          id="AppBar"
+          position="fixed"
+          gutterBottom
+          className='app'
+          sx={{ top: 'auto', bottom: -40 }}
+        >
+          <Toolbar className='footer'>
+            <div>
+              <a  className='link'href='https://www.linkedin.com/in/kris-garcia-3b7292146/'><LinkedInIcon/></a>
+              <a className='git' href='https://github.com/Weeechi'><GitHubIcon className='gitKris'/></a>
+              <h4>Kris Garcia</h4>
+            </div>
+            <div className='div'>
+              <a  className='link'href='https://www.linkedin.com/in/kevin-j-casey/'><LinkedInIcon/></a>
+              <a  href='https://github.com/kevinjcasey'><GitHubIcon className='gitKev'/></a>
+              <h4 className='namekev'>Kevin J Casey</h4>
+            </div>
+            <div className='div'>
+              <a  className='link'href='https://www.linkedin.com/in/angelvalentin1/'><LinkedInIcon/></a>
+              <a className='gitAngel' href='https://github.com/angelgvalentin'><GitHubIcon className='gitAngel'/></a>
+            <h4 className='namekev'>Angel Valentin</h4>
+           </div>
+          </Toolbar>
+        </AppBar>
       </ThemeProvider>
     )   
 }

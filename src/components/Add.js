@@ -3,10 +3,15 @@ import axios from 'axios'
 
 import {
   Alert,
+  AppBar,
   Button, 
   Snackbar, 
   TextField,
+  Toolbar
   } from '@mui/material'
+
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 // ============== MUI Theme ============== //
 
@@ -137,7 +142,33 @@ export const Add = () => {
         </Snackbar>
         </form>
       </center>
+    <AppBar
+        id="AppBar"
+        position="fixed"
+        gutterBottom
+        className='app'
+        sx={{ top: 'auto', bottom: -40 }}
+      >
+        <Toolbar className='footer'>
+          <div>
+            <a  className='link'href='https://www.linkedin.com/in/kris-garcia-3b7292146/'><LinkedInIcon/></a>
+            <a className='git' href='https://github.com/Weeechi'><GitHubIcon className='gitKris'/></a>
+            <h4>Kris Garcia</h4>
+          </div>
+          <div className='div'>
+            <a  className='link'href='https://www.linkedin.com/in/kevin-j-casey/'><LinkedInIcon/></a>
+            <a  href='https://github.com/kevinjcasey'><GitHubIcon className='gitKev'/></a>
+            <h4 className='namekev'>Kevin J Casey</h4>
+          </div>
+          <div className='div'>
+            <a  className='link'href='https://www.linkedin.com/in/angelvalentin1/'><LinkedInIcon/></a>
+            <a className='gitAngel' href='https://github.com/angelgvalentin'><GitHubIcon className='gitAngel'/></a>
+          <h4 className='namekev'>Angel Valentin</h4>
+          </div>
+        </Toolbar>
+      </AppBar>
     </ThemeProvider>
+    
   )
 }
 
