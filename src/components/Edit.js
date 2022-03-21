@@ -235,9 +235,11 @@ export const Edit = () => {
                                   size="small"
                                   // variant="standard"
                                   type="text" 
-                                  name="subject" 
+                                  name="subject"
                                   defaultValue={flashcard.subject} 
                                   onChange={handleChange}
+                                  multiline
+                                  rows={2}
                                 />
 
                                 <TextField
@@ -249,6 +251,8 @@ export const Edit = () => {
                                   name="question" 
                                   defaultValue={flashcard.question} 
                                   onChange={handleChange}
+                                  multiline
+                                  rows={2}
                                 />
 
                                 <TextField 
@@ -260,6 +264,8 @@ export const Edit = () => {
                                   name="answer" 
                                   defaultValue={flashcard.answer} 
                                   onChange={handleChange}
+                                  multiline
+                                  rows={2}
                                 />
                                 <br />  
                                 <br />
@@ -276,13 +282,12 @@ export const Edit = () => {
                           </CardContent>
                           <CardActions>
                             <IconButton 
-                                onClick={(event) =>{handleDelete(event, flashcard)}} 
-                                value={flashcard.id}
-                                variant="contained"
-                                color="error"
-                                startIcon={<DeleteIcon />}
+                              // onClick={(event) => {handleDelete(event, flashcard)}} 
+                              value={flashcard.id}
+                              // variant="contained"
+                              color="error"
                             >
-                            <DeleteIcon />
+                              <DeleteIcon onClick={(event) => {handleDelete(event, flashcard)}} />
                             </IconButton>
                           </CardActions>
                         </Card>
