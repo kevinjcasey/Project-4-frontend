@@ -257,6 +257,11 @@ export const Home = (props) => {
                             Show Answer
                             </Button>
                           </div>
+                          <Checkbox 
+                            onChange={progressFunction}
+                            icon={<StarOutlineIcon fontSize="large" />}
+                            checkedIcon={<StarIcon fontSize="large" />}
+                          />
                         </Card>
                       </div>
                       {/* --- Back of card --- */}
@@ -300,11 +305,6 @@ export const Home = (props) => {
                       sx={{ "paddingTop": "20px", "margin": "20px" }}
                       variant="determinate"
                       value={progress}
-                  />
-                  <Checkbox 
-                    onChange={progressFunction}
-                    icon={<StarOutlineIcon fontSize="large" />}
-                    checkedIcon={<StarIcon fontSize="large" />}
                   />
         </Typography>
       </div>
