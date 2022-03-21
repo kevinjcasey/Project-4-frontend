@@ -12,8 +12,7 @@ return (
       <Route path='add' element={<Add />}/>
       <Route path='edit' element={<Edit />}/>
     </Routes>
-  )
-  
+  ) 
 }
 
 export default App;
