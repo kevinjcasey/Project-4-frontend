@@ -2,10 +2,9 @@
     text-align: center;
 }
 
-body{
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% );
+body {
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(240, 242, 255) 0%, rgb(246, 246, 255) 81.3%);
 }
-
 
 .App-logo {
     height: 40vmin;
@@ -66,7 +65,25 @@ body{
     border: 2px solid rgba(157, 157, 157, 0.406);
     border-radius: 8px;
     /* box-shadow: 8px 10px 5px grey; */
-    width: auto;
+    width: 80%;
     height: 450px;
     padding-bottom: 0;
+}
+
+#editForm {
+    padding: 40px;
+    text-align: start;
+}
+
+.AppBar a {
+    text-decoration: none !important;
+}
+
+.linkStyle a {
+    text-decoration: none;
+}
+
+#carouselContainer {
+    display: flex;
+    justify-content: center;
 }
