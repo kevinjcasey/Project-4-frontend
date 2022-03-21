@@ -114,8 +114,12 @@ export const Home = (props) => {
   const [checked, setChecked] = useState(false)
 
   const progressFunction = () => {
+    if (setChecked(true)) {
       setProgress(progress + 10)
-    }   
+    } else if (setChecked(false)) {
+      setProgress(progress - 10)
+    }
+  }   
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
