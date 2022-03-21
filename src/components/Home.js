@@ -82,32 +82,27 @@ export const Home = (props) => {
 
     const classes = useStyles();
 
-
-
-
-  const [flashcards, setFlashcards] = useState([]);
-
-
-  const getFlashcard = () => {
-    axios
-         .get('https://flashcards-backend-ga.herokuapp.com/api/flashcards')
-         .then(
-           (response) => setFlashcards(response.data),
-           (err) => console.error(err)
-         )
-         .catch((error) => console.error(error))
-  }
-
+    const [flashcards, setFlashcards] = useState([]);
 
     const getFlashcard = () => {
         axios
-            .get("http://localhost:8000/api/flashcards")
+            .get("https://flashcards-backend-ga.herokuapp.com/api/flashcards")
             .then(
                 (response) => setFlashcards(response.data),
                 (err) => console.error(err)
             )
             .catch((error) => console.error(error));
     };
+
+    // const getFlashcard = () => {
+    //     axios
+    //         .get("http://localhost:8000/api/flashcards")
+    //         .then(
+    //             (response) => setFlashcards(response.data),
+    //             (err) => console.error(err)
+    //         )
+    //         .catch((error) => console.error(error));
+    // };
 
     // =========== Progress Bar =========== //
 
@@ -253,7 +248,7 @@ export const Home = (props) => {
                     </div>
                     <LinearProgress sx={{ paddingTop: "20px", margin: "20px" }} variant="determinate" value={progress} />
                 </Typography>
-\
+                \
             </div>
             <AppBar id="AppBar" position="fixed" className="app" sx={{ top: "auto", bottom: -40 }}>
                 <Toolbar className="footer">
