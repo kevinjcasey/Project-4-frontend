@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     AppBarLinks: {
         textDecoration: "none",
         color: "white",
+        "&:hover": {
+            fontSize: "1.1em",
+        },
         marginRight: 16,
     },
 }));
@@ -143,7 +146,7 @@ export const Add = () => {
                             <br />
                             <br />
 
-                            <Button type="submit" variant="contained" color="success" onClick={handleClick}>
+                            <Button type="submit" variant="contained" color="primary" onClick={handleClick}>
                                 Submit
                             </Button>
 

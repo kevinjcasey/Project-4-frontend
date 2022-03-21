@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     AppBarLinks: {
         textDecoration: "none",
         color: "white",
+        "&:hover": {
+            fontSize: "1.1em",
+        },
         marginRight: "16px",
         fontFamily: "Fredoka",
     },

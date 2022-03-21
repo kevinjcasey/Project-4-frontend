@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
     AppBarLinks: {
         textDecoration: "none",
         color: "white",
+        "&:hover": {
+            fontSize: "1.1em",
+        },
         marginRight: 16,
     },
 }));
@@ -168,68 +171,70 @@ export const Home = (props) => {
             {/* -------- Carousel ------- */}
             <div className="flashcards">
                 <Typography variant="h6" color="primary" align="center">
-                    <Carousel
-                        className="carousel"
-                        autoPlay={false}
-                        indicators={false}
-                        navButtonsAlwaysVisible={true}
-                        animation="slide"
-                        duration="400"
-                        swipe="true"
-                        onChange={progressFunction}
-                        NavButton={({ onClick, className, style, next, prev }) => {
-                            return (
-                                <Button onClick={onClick} className={className} style={style}>
-                                    {next && "Next"}
-                                    {prev && "Previous"}
-                                </Button>
-                            );
-                        }}
-                    >
-                        {flashcards.map((flashcard) => {
-                            return (
-                                <div className="flashcard" key={flashcard.id}>
-                                    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" spacing={4}>
-                                        {/* --- Front of card --- */}
-                                        <div>
-                                            <Card className="Card1">
-                                                <Typography gutterBottom padding="30px" variant="h3">
-                                                    Subject: {flashcard.subject}
-                                                </Typography>
-                                                <Typography padding="50px" variant="h4">
-                                                    {flashcard.question}
-                                                </Typography>
-                                                <div className="CardAction">
-                                                    {/* ---- Flip button ---- */}
-                                                    <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
-                                                        Flip
-                                                    </Button>
-                                                </div>
-                                            </Card>
-                                        </div>
-                                        {/* --- Back of card --- */}
-                                        <div>
-                                            <Card className="Card1">
-                                                <CardContent>
-                                                    <Typography gutterBottom paddingTop="20px" marginBottom="80px" variant="h3">
-                                                        Answer
+                    <div id="carouselContainer">
+                        <Carousel
+                            className="carousel"
+                            autoPlay={false}
+                            indicators={false}
+                            navButtonsAlwaysVisible={true}
+                            animation="slide"
+                            duration="400"
+                            swipe="true"
+                            onChange={progressFunction}
+                            NavButton={({ onClick, className, style, next, prev }) => {
+                                return (
+                                    <Button onClick={onClick} className={className} style={style}>
+                                        {next && "Next"}
+                                        {prev && "Previous"}
+                                    </Button>
+                                );
+                            }}
+                        >
+                            {flashcards.map((flashcard) => {
+                                return (
+                                    <div className="flashcard" key={flashcard.id}>
+                                        <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" spacing={4}>
+                                            {/* --- Front of card --- */}
+                                            <div>
+                                                <Card className="Card1">
+                                                    <Typography gutterBottom padding="30px" variant="h3">
+                                                        Subject: {flashcard.subject}
                                                     </Typography>
-                                                    <Typography variant="h4" marginBottom="30px" padding="50px">
-                                                        {flashcard.answer}
+                                                    <Typography padding="50px" variant="h4">
+                                                        {flashcard.question}
                                                     </Typography>
-                                                </CardContent>
-                                                <CardActions className="CardAction">
-                                                    <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
-                                                        Flip
-                                                    </Button>
-                                                </CardActions>
-                                            </Card>
-                                        </div>
-                                    </ReactCardFlip>
-                                </div>
-                            );
-                        })}
-                    </Carousel>
+                                                    <div className="CardAction">
+                                                        {/* ---- Flip button ---- */}
+                                                        <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
+                                                            Flip
+                                                        </Button>
+                                                    </div>
+                                                </Card>
+                                            </div>
+                                            {/* --- Back of card --- */}
+                                            <div>
+                                                <Card className="Card1">
+                                                    <CardContent>
+                                                        <Typography gutterBottom paddingTop="20px" marginBottom="80px" variant="h3">
+                                                            Answer
+                                                        </Typography>
+                                                        <Typography variant="h4" marginBottom="30px" padding="50px">
+                                                            {flashcard.answer}
+                                                        </Typography>
+                                                    </CardContent>
+                                                    <CardActions className="CardAction">
+                                                        <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
+                                                            Flip
+                                                        </Button>
+                                                    </CardActions>
+                                                </Card>
+                                            </div>
+                                        </ReactCardFlip>
+                                    </div>
+                                );
+                            })}
+                        </Carousel>
+                    </div>
                     <LinearProgress sx={{ paddingTop: "20px", margin: "20px" }} variant="determinate" value={progress} />
                 </Typography>
                 {/* <Add handleCreate={handleCreate} /> */}

@@ -65,7 +65,7 @@ body {
     border: 2px solid rgba(157, 157, 157, 0.406);
     border-radius: 8px;
     /* box-shadow: 8px 10px 5px grey; */
-    width: auto;
+    width: 80%;
     height: 450px;
     padding-bottom: 0;
 }
@@ -81,4 +81,9 @@ body {
 
 .linkStyle a {
     text-decoration: none;
+}
+
+#carouselContainer {
+    display: flex;
+    justify-content: center;
 }
