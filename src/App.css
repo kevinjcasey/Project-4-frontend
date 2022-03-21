@@ -87,3 +87,24 @@ body {
     display: flex;
     justify-content: center;
 }
+
+@media (max-width: 600px) {
+    .css-480o17-MuiGrid-root {
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        width: 100%;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-top: -32px;
+        width: calc(100% + 32px);
+        margin-left: 0px !important;
+    }
+}
