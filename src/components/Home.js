@@ -67,13 +67,15 @@ export const Home = (props) => {
 
   const [progress, setProgress] = useState(0)
 
-  // const progressFunction = () => {
+  const arrayOfNumbers = [1,2,3,4,5]
+
+  const progressFunction = () => {
   //   if (flashcards.question == flashcards[0]) {
   //     setProgress(progress + 10)
   //   } else if (flashcards.question == flashcards[1]) {
-  //     setProgress(progress + 10)
+      setProgress(progress + 10)
   //   }
-  // }
+  }
 
   // Need to grab the index of the card displayed --
     // then show a number based on that index
@@ -157,8 +159,8 @@ export const Home = (props) => {
               duration="400"
               swipe="true"
               // index={2}
-              // onChange={progressFunction}
-              // IndicatorIcon={arrayOfNumbers}
+              onChange={progressFunction}
+              IndicatorIcon={arrayOfNumbers}
               NavButton={({ onClick, className, style, next, prev }) => {
                 return (
                   <Button 
