@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     CardContent: {
-        flexGrow: 1,
+        height: "300px !important",
     },
     footer: {
         padding: "40px 0",
@@ -195,7 +195,7 @@ export const Edit = () => {
                         <div>
                             <Grid item key="front">
                                 <Card className={classes.card}>
-                                    <CardContent className={classes.cardContent}>
+                                    <CardContent id="cardContent" className={classes.cardContent}>
                                         <Typography variant="h5">Subject: {flashcard.subject}</Typography>
                                         <Typography variant="h6">Question: {flashcard.question}</Typography>
                                         {displayAnswer && selectIndex === index ? <Typography variant="h6">Answer: {flashcard.answer}</Typography> : null}

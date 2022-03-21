@@ -127,3 +127,7 @@ body {
 .cardsContainer {
     padding: 40px 0;
 }
+
+#cardContent {
+    min-height: 130px;
+}
