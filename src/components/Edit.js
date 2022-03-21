@@ -263,31 +263,35 @@ export const Edit = () => {
                                         ) : null}
                                     </CardContent>
                                     <CardActions>
-                                        <IconButton 
+                                        <Button 
                                           value={flashcard.id}
                                           variant="contained"
                                           color="error"
+                                          size="medium"
+                                          startIcon={<DeleteIcon />}
                                           onClick={(event) => {handleDelete(event, flashcard)}} 
                                         >
-                                          <DeleteIcon />
-                                        </IconButton>
+                                          Delete
+                                        </Button>
                                         {/* --- Edit Button --- */}
-                                        <IconButton 
+                                        <Button 
                                           variant="contained" 
-                                          size="small" 
                                           color="primary"
+                                          size="medium"
+                                          startIcon={<EditIcon />}
                                           onClick={(event) => {handleEditDisplay(index)}}
                                         >
-                                        <EditIcon />
-                                        </IconButton>
-                                        <IconButton 
-                                          variant="contained" 
-                                          size="small" 
-                                          color="secondary"
+                                          Edit
+                                        </Button>
+                                        <Button 
+                                          variant="outlined"
+                                          color="primary"
+                                          size="medium"
+                                          startIcon={<PreviewIcon />}
                                           onClick={(event) => {handleAnswerDisplay(index)}}
                                         >
-                                        <PreviewIcon />
-                                        </IconButton>
+                                          Answer
+                                        </Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -296,7 +300,12 @@ export const Edit = () => {
 
                 </Container>
                 {/* ----- SnackBar alert ----- */}
-                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Snackbar 
+                  open={open} 
+                  autoHideDuration={2000} 
+                  onClose={handleClose}
+                  anchorOrigin={{ vertical: 'top', horizontal: 'center'}}
+                >
                     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
                         Index Card Deleted
                     </Alert>

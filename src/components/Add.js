@@ -116,22 +116,6 @@ export const Add = () => {
         form.reset();
     };
 
-  
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-
-
-
   return (
     <ThemeProvider theme={theme}>
                 <AppBar id="AppBar" position="relative" >
@@ -220,6 +204,7 @@ export const Add = () => {
             open={open} 
             autoHideDuration={3000} 
             onClose={handleClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center'}}
           >
             <Alert 
               onClose={handleClose} 
