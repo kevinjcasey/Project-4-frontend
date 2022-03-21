@@ -10,10 +10,16 @@ import {
   Card,
   Snackbar, 
   TextField,
-  Toolbar
+  Toolbar,
+  Typography
   } from '@mui/material'
 
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+
 import { makeStyles } from "@mui/styles";
+
+// ============== MUI Theme ============== //
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -30,6 +36,8 @@ const theme = createTheme({
         fontWeightLight: "700",
     },
 });
+
+// =========== ^^MUI Theme^^ ============= //
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -63,29 +71,6 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 16,
     },
 }));
-
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import GitHubIcon from '@mui/icons-material/GitHub'
-
-// ============== MUI Theme ============== //
-
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-
-const theme = createTheme({
-  palette: {
-    secondary: {
-      main: '#fefefe'
-    }
-  },
-  typography: {
-    fontFamily: 'Fredoka',
-    fontWeightLight: '400',
-    fontWeightLight: '500',
-    fontWeightLight: '600',
-    fontWeightLight: '700',
-  }
-})
-// =========== ^^MUI Theme^^ ============= //
 
 export const Add = () => {
     const classes = useStyles();
@@ -131,9 +116,24 @@ export const Add = () => {
         form.reset();
     };
 
-    return (
-        <>
-            <ThemeProvider theme={theme}>
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+
+
+
+  return (
+    <ThemeProvider theme={theme}>
                 <AppBar id="AppBar" position="relative" gutterBottom>
                     <Toolbar>
                         <Typography style={{ textDecoration: "none" }} variant="h6">
@@ -162,71 +162,6 @@ export const Add = () => {
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
                     Index Cards On the Flash
                 </Typography>
-                <center>
-                    <Card className={classes.card}>
-                        <br />
-                        <h3>Add A New Flash Card</h3>
-                        <br />
-                        <form onSubmit={handleSubmit} id="addForm">
-                            <TextField label="Subject" name="subject" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
-                            <br />
-                            <br />
-                            <TextField label="Question" name="question" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
-                            <br />
-                            <br />
-                            <TextField label="Answer" name="answer" id="outlined-size-small" size="small" type="text" onChange={handleChange} />
-                            <br />
-                            <br />
-
-                            <Button type="submit" variant="contained" color="primary" onClick={handleClick}>
-                                Submit
-                            </Button>
-
-  let emptyFlashcard = {
-    subject: "",
-    question: "",
-    answer: "",
-  };
-
-  const [flashcards, setFlashcards] = useState([emptyFlashcard])
-
-  // ========= SnackBar ========== // 
-
-  const [open, setOpen] = React.useState(false)
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false)
-  };
-
-  const handleChange = (event) => {
-    setFlashcards({ ...flashcards, [event.target.name]: event.target.value })
-  };
-
-  const form = document.getElementById("addForm")
-
-  const handleCreate = (addFlashcard)  => {
-    axios
-      .post('http://localhost:8000/api/flashcards', addFlashcard)
-      .then((response)=> {
-        setFlashcards([response.data])
-    })
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    handleCreate(flashcards)
-    form.reset()
-  }
-
-  return (
-    <ThemeProvider theme={theme}>
       <center>
         <br/>
         <h3>Add A New Flash Card</h3>

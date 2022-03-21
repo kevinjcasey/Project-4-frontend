@@ -40,6 +40,10 @@ code {
   justify-content: space-between;
 }
 
-.toolbar a {
+.footer a {
     color: white;
+}
+
+.footer a:hover {
+  color: darkmagenta;
 }
