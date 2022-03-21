@@ -70,9 +70,20 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "1.1em",
         },
         marginRight: 16,
+        "@media (max-width:600px)": {
+            fontSize: ".9em",
+        },
     },
     CardAction: {
         marginTop: "50px",
+    },
+    QuestionStyle: {
+        padding: "50px",
+        marginBottom: "80px !important",
+        "@media (max-width:600px)": {
+            padding: "30px",
+            marginBottom: "50px !important",
+        },
     },
 }));
 // =========== ^^MUI Theme^^ ============= //
@@ -202,7 +213,7 @@ export const Home = (props) => {
                                                     <Typography marginBottom="20px" padding="30px" variant="h3">
                                                         Subject: {flashcard.subject}
                                                     </Typography>
-                                                    <Typography marginBottom="80px" padding="50px" variant="h4">
+                                                    <Typography className={classes.QuestionStyle} variant="h4">
                                                         {flashcard.question}
                                                     </Typography>
                                                     <div className="CardAction">
@@ -218,7 +229,7 @@ export const Home = (props) => {
                                                 <Card className="Card1">
                                                     <CardContent>
                                                         <Typography paddingTop="20px" marginBottom="80px" variant="h3"></Typography>
-                                                        <Typography marginBottom="80px" variant="h4" padding="50px">
+                                                        <Typography className={classes.QuestionStyle} variant="h4">
                                                             {flashcard.answer}
                                                         </Typography>
                                                     </CardContent>
@@ -235,7 +246,9 @@ export const Home = (props) => {
                             })}
                         </Carousel>
                     </div>
-                    <LinearProgress sx={{ paddingTop: "20px", margin: "20px" }} variant="determinate" value={progress} />
+                    <div className="progressBarContainer">
+                        <LinearProgress id="progressBar" sx={{ paddingTop: "20px", margin: "20px" }} variant="determinate" value={progress} />
+                    </div>
                 </Typography>
             </div>
             <AppBar id="AppBar" position="fixed" className="app" sx={{ top: "auto", bottom: -40 }}>

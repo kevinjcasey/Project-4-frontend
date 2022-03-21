@@ -107,4 +107,23 @@ body {
         width: calc(100% + 32px);
         margin-left: 0px !important;
     }
+
+    .cardsContainer {
+        padding: 10px 0 !important;
+    }
+}
+
+.progressBarContainer {
+    display: flex;
+
+    justify-content: center;
+}
+
+#progressBar {
+    display: flex;
+    width: 80%;
+}
+
+.cardsContainer {
+    padding: 40px 0;
 }

@@ -45,13 +45,14 @@ const useStyles = makeStyles((theme) => ({
     cardGrid: {
         padding: "20px 0",
         width: "800px",
+        // paddingBottom: "40px",
     },
     card: {
         height: "100%",
         width: " 400px",
-        // "@media (max-width:600px)": {
-        //     width: "70%",
-        // },
+        "@media (max-width:600px)": {
+            width: "367px",
+        },
         display: "flex",
         flexDirection: "column",
         padding: "20px",
@@ -71,9 +72,10 @@ const useStyles = makeStyles((theme) => ({
         },
         marginRight: "16px",
         "@media (max-width:600px)": {
-            marginRight: "8px",
             fontSize: ".9em",
-            padding: 0,
+            "&:hover": {
+                fontSize: ".95em",
+            },
         },
         fontFamily: "Fredoka",
     },
@@ -337,11 +339,13 @@ export const Edit = () => {
                 Index Card Gallery:
             </Typography>
 
-            <Container className={classes.cardGrid} maxWidth="md">
-                <Grid className={classes.cardContainer} container justifyContent="center" gap="20px">
-                    {flashcardArray}
-                </Grid>
-            </Container>
+            <div className="cardsContainer">
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid className={classes.cardContainer} container justifyContent="center" gap="20px">
+                        {flashcardArray}
+                    </Grid>
+                </Container>
+            </div>
             <AppBar id="AppBar" position="fixed" className="app" sx={{ top: "auto", bottom: -40 }}>
                 <Toolbar className="footer">
                     <div>

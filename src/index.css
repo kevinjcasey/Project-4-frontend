@@ -24,7 +24,7 @@ code {
   background-repeat: no-repeat;
   background-size: cover; */
     padding-bottom: 100px;
-    background-image: linear-gradient(178deg, rgba(201, 234, 252, 0.51) 14.9%, rgba(139, 192, 216, 0.73) 80%);
+    background: transparent;
 }
 
 .toolbar {
@@ -47,4 +47,9 @@ code {
 
 .footer a:hover {
     color: darkmagenta;
+}
+
+@media (max-width: 600px) {
+    .toolbar {
+    }
 }
