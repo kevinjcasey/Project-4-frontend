@@ -2,30 +2,55 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
 // ============ MUI components ============ //
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Alert, AppBar, Button, Card, CardActions, CardContent, Container, Grid, Snackbar, TextField, Toolbar, Typography } from "@mui/material";
+
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import PreviewIcon from '@mui/icons-material/Preview'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+
+import {
+    Alert,
+    AppBar,
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    Container,
+    Grid,
+    IconButton,
+    Snackbar,
+    TextField,
+    Toolbar,
+    Typography
+} from '@mui/material'
+
 import { makeStyles } from "@mui/styles";
 
-// =========== Setting Theme  ============= //
+// ============== MUI Theme ============== //
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
+  const theme = createTheme({
     palette: {
-        secondary: {
-            main: "#fefefe",
-        },
+      secondary: {
+        main: '#9932cc'
+      }
     },
     typography: {
-        fontFamily: "Fredoka",
-        fontWeightLight: "400",
-        fontWeightLight: "500",
-        fontWeightLight: "600",
-        fontWeightLight: "700",
-    },
-});
+      fontFamily: 'Fredoka',
+      fontWeightLight: '400',
+      fontWeightLight: '500',
+      fontWeightLight: '600',
+      fontWeightLight: '700',
+    }
+  })
+// =========== ^^MUI Theme^^ ============= //
+
 
 // =========== AllCards stuff ============= //
 
@@ -197,6 +222,8 @@ export const Edit = () => {
                                                         name="subject"
                                                         defaultValue={flashcard.subject}
                                                         onChange={handleChange}
+                                                        multiline
+                                                        rows={2}
                                                     />
                                                     <br />
                                                     <br />
@@ -210,6 +237,8 @@ export const Edit = () => {
                                                         name="question"
                                                         defaultValue={flashcard.question}
                                                         onChange={handleChange}
+                                                        multiline
+                                                        rows={2}
                                                     />
                                                     <br />
                                                     <br />
@@ -223,6 +252,8 @@ export const Edit = () => {
                                                         name="answer"
                                                         defaultValue={flashcard.answer}
                                                         onChange={handleChange}
+                                                        multiline
+                                                        rows={2}
                                                     />
                                                     <br />
                                                     <br />
@@ -234,43 +265,37 @@ export const Edit = () => {
                                         ) : null}
                                     </CardContent>
                                     <CardActions>
-                                        <Button
-                                            onClick={(event) => {
-                                                handleDelete(event, flashcard);
-                                            }}
-                                            value={flashcard.id}
-                                            variant="contained"
-                                            color="error"
-                                            startIcon={<DeleteIcon />}
+                                        <IconButton 
+                                          // onClick={(event) => {handleDelete(event, flashcard)}} 
+                                          value={flashcard.id}
+                                          // variant="contained"
+                                          color="error"
                                         >
-                                            Delete
-                                        </Button>
+                                          <DeleteIcon onClick={(event) => {handleDelete(event, flashcard)}} />
+                                        </IconButton>
                                         {/* --- Edit Button --- */}
-                                        <Button
-                                            variant="contained"
-                                            size="medium"
-                                            color="primary"
-                                            onClick={(event) => {
-                                                handleEditDisplay(index);
-                                            }}
+                                        <IconButton 
+                                          variant="contained" 
+                                          size="small" 
+                                          color="primary"
+                                          onClick={(event) => {handleEditDisplay(index)}}
                                         >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            variant="outlined"
-                                            size="medium"
-                                            color="primary"
-                                            onClick={(event) => {
-                                                handleAnswerDisplay(index);
-                                            }}
+                                        <EditIcon />
+                                        </IconButton>
+                                        <IconButton 
+                                          variant="contained" 
+                                          size="small" 
+                                          color="secondary"
+                                          onClick={(event) => {handleAnswerDisplay(index)}}
                                         >
-                                            Show Answer
-                                        </Button>
+                                        <PreviewIcon />
+                                        </IconButton>
                                     </CardActions>
                                 </Card>
                             </Grid>
                         </div>
                     </Grid>
+
                 </Container>
                 {/* ----- SnackBar alert ----- */}
                 <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
@@ -283,9 +308,8 @@ export const Edit = () => {
     });
 
     return (
-        <>
-            <ThemeProvider theme={theme}>
-                <AppBar id="AppBar" position="relative" gutterBottom>
+      <ThemeProvider theme={theme}>
+        <AppBar id="AppBar" position="relative" gutterBottom>
                     <Toolbar className="toolbar">
                         <Typography variant="h6">
                             <Link className={classes.AppBarLinks} to="/">
@@ -304,8 +328,7 @@ export const Edit = () => {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-
-                {/* ----- App Name and Slogan ----- */}
+        {/* ----- App Name and Slogan ----- */}
                 <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
                     FlashPrep
                 </Typography>
@@ -316,24 +339,40 @@ export const Edit = () => {
                 <Typography variant="h5" align="center">
                     Index Card Gallery:
                 </Typography>
-                <Container className={classes.cardGrid} maxWidth="md">
+        
+        <Container className={classes.cardGrid} maxWidth="md">
                     <Grid className={classes.cardContainer} container justifyContent="center" gap="20px">
                         {flashcardArray}
                     </Grid>
                 </Container>
-
-                <footer className={classes.footer}>
-                    <Typography variant="h6" align="center" gutterBottom>
-                        Footer
-                    </Typography>
-                    <Typography variant="subtitle1" align="center" color="textSecondary">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
-                    </Typography>
-                </footer>
-            </ThemeProvider>
-        </>
-    );
-};
+        <AppBar
+          id="AppBar"
+          position="fixed"
+          gutterBottom
+          className='app'
+          sx={{ top: 'auto', bottom: -40 }}
+        >
+          <Toolbar className='footer'>
+            <div>
+              <a  className='link'href='https://www.linkedin.com/in/kris-garcia-3b7292146/'><LinkedInIcon/></a>
+              <a className='git' href='https://github.com/Weeechi'><GitHubIcon className='gitKris'/></a>
+              <h4>Kris Garcia</h4>
+            </div>
+            <div className='div'>
+              <a  className='link'href='https://www.linkedin.com/in/kevin-j-casey/'><LinkedInIcon/></a>
+              <a  href='https://github.com/kevinjcasey'><GitHubIcon className='gitKev'/></a>
+              <h4 className='namekev'>Kevin J Casey</h4>
+            </div>
+            <div className='div'>
+              <a  className='link'href='https://www.linkedin.com/in/angelvalentin1/'><LinkedInIcon/></a>
+              <a className='gitAngel' href='https://github.com/angelgvalentin'><GitHubIcon className='gitAngel'/></a>
+            <h4 className='namekev'>Angel Valentin</h4>
+           </div>
+          </Toolbar>
+        </AppBar>
+      </ThemeProvider>
+    )   
+}
 
 export default Edit;
 

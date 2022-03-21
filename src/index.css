@@ -33,6 +33,13 @@ code {
     justify-content: start;
 }
 
+/* ============ Footer CSS =========== */
+
+.footer{
+  display: flex;
+  justify-content: space-between;
+}
+
 .toolbar a {
     color: white;
 }
