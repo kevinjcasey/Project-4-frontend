@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 // ============ MUI components ============ //
 
-import '/Users/kevinjcasey/Desktop/Project-4-frontend/Project-4-frontend/src/App.css'
+
+import "../App.css";
 import { 
   AppBar, 
   Button, 
@@ -20,40 +21,77 @@ import PreviewIcon from '@mui/icons-material/Preview'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
+import { makeStyles } from "@mui/styles";
+
 // =========== Card Flip ============ //
 
 import ReactCardFlip from "react-card-flip";
 
 // ============= MUI Carousel ============= //
 
-import Carousel from 'react-material-ui-carousel'
+import Carousel from "react-material-ui-carousel";
 
 // ============== MUI Theme ============== //
 
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-  palette: {
-    secondary: {
-      main: '#fefefe'
-    }
-  },
-  typography: {
-    fontFamily: 'Fredoka',
-    fontWeightLight: '400',
-    fontWeightLight: '500',
-    fontWeightLight: '600',
-    fontWeightLight: '700',
-  }
-})
-// =========== ^^MUI Theme^^ ============= //
+    palette: {
+        secondary: {
+            main: "#fefefe",
+        },
+    },
+    typography: {
+        fontFamily: "Fredoka",
+        fontWeightLight: "400",
+        fontWeightLight: "500",
+        fontWeightLight: "600",
+        fontWeightLight: "700",
+    },
+});
 
+const useStyles = makeStyles((theme) => ({
+    container: {
+        // backgroundColor: theme.palette.background.paper,
+        // padding: theme.spacing(8, 0, 6),
+    },
+
+    cardGrid: {
+        padding: "20px 0",
+    },
+    card: {
+        height: "100%",
+        width: " 600px",
+        display: "flex",
+        flexDirection: "column",
+        padding: "20px",
+    },
+
+    CardContent: {
+        flexGrow: 1,
+    },
+    footer: {
+        padding: "40px 0",
+    },
+    AppBarLinks: {
+        textDecoration: "none",
+        color: "white",
+        "&:hover": {
+            fontSize: "1.1em",
+        },
+        marginRight: 16,
+    },
+}));
+// =========== ^^MUI Theme^^ ============= //
 
 export const Home = (props) => {
 
 // ============= CRUD functions ============= //
 
-  const [flashcards, setFlashcards] = useState([])
+  const classes = useStyles();
+
+  const [flashcards, setFlashcards] = useState([]);
+
 
   const getFlashcard = () => {
     axios
@@ -65,7 +103,9 @@ export const Home = (props) => {
          .catch((error) => console.error(error))
   }
 
-  // =========== Progress Bar =========== //
+
+    // =========== Progress Bar =========== //
+
 
   const [progress, setProgress] = useState(0)
 
@@ -79,10 +119,11 @@ export const Home = (props) => {
   //   }
   }
 
-  // Need to grab the index of the card displayed --
+    // Need to grab the index of the card displayed --
     // then show a number based on that index
     // if children.index = 2
     // display "in" progress bar '2 out of <children.length>'
+
 
     // Try messing around with props inside LinearProgress componenet?
 
@@ -112,22 +153,26 @@ export const Home = (props) => {
   return (
     <ThemeProvider theme={theme}>
       {/* ----- Nav Bar ----- */}
-      <AppBar 
-        id="AppBar" 
-        position="relative"
-      >
-        <Toolbar className='toolbar'>
-            <Typography variant="h6">
-              <Link to='/' style={{ textDecoration: 'none', color: 'inherit'}}>Home</Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link to="/add" style={{ textDecoration: 'none', color: 'inherit' }}>Add Flashcard</Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link to="/edit" style={{ textDecoration: 'none', color: 'inherit'}}>View All Flashcards</Link>
-            </Typography>
-        </Toolbar>
-      </AppBar>
+     <AppBar id="AppBar" position="relative" gutterBottom>
+                <Toolbar>
+                    <Typography style={{ textDecoration: "none" }} variant="h6">
+                        <Link className={classes.AppBarLinks} to="/">
+                            Home
+                        </Link>
+                    </Typography>
+                    <Typography variant="h6">
+                        <Link className={classes.AppBarLinks} to="/add">
+                            {" "}
+                            Add Flashcard
+                        </Link>
+                    </Typography>
+                    <Typography variant="h6">
+                        <Link className={classes.AppBarLinks} to="/edit">
+                            View All Flashcards
+                        </Link>
+                    </Typography>
+                </Toolbar>
+            </AppBar>
       {/* ----- App Name and Slogan ----- */}
       <Typography 
         variant="h2" 
@@ -152,6 +197,7 @@ export const Home = (props) => {
           color="primary" 
           align="center"
           >
+           <div id="carouselContainer">
             <Carousel
               className="carousel"
               autoPlay={false}
@@ -248,6 +294,7 @@ export const Home = (props) => {
                 );
               })}
             </Carousel>
+           </div>
                   <LinearProgress 
                       sx={{ "paddingTop": "20px", "margin": "20px" }}
                       variant="determinate"
