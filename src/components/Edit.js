@@ -113,7 +113,7 @@ export const Edit = () => {
     };
 
     const handleDelete = (event, deletedFlashcards) => {
-        axios.delete("http://localhost:8000/api/flashcards/" + event.target.value).then((response) => {
+        axios.delete("https://flashcards-backend-ga.herokuapp.com/api/flashcards/" + event.target.value).then((response) => {
             setFlashcards(flashcards.filter((x) => x.id !== deletedFlashcards.id));
         });
         handleClick();
@@ -131,13 +131,13 @@ export const Edit = () => {
             flashcard.answer = flashcards[index].answer;
         }
         axios
-            .put(`http://localhost:8000/api/flashcards/` + id, {
+            .put(`https://flashcards-backend-ga.herokuapp.com/api/flashcards/` + id, {
                 subject: flashcard.subject,
                 question: flashcard.question,
                 answer: flashcard.answer,
             })
             .then(() => {
-                axios.get("http://localhost:8000/api/flashcards").then((response) => {
+                axios.get("https://flashcards-backend-ga.herokuapp.com/api/flashcards").then((response) => {
                     setFlashcards(response.data);
                 });
             });
@@ -188,7 +188,7 @@ export const Edit = () => {
 
     // ============ UseEffect ================ //
     useEffect(() => {
-        axios.get("http://localhost:8000/api/flashcards").then((response) => {
+        axios.get("https://flashcards-backend-ga.herokuapp.com/api/flashcards").then((response) => {
             setFlashcards(response.data);
         });
     }, []);

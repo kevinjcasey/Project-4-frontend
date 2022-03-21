@@ -95,7 +95,7 @@ export const Home = (props) => {
 
   const getFlashcard = () => {
     axios
-         .get('http://localhost:8000/api/flashcards')
+         .get('https://flashcards-backend-ga.herokuapp.com/api/flashcards')
          .then(
            (response) => setFlashcards(response.data),
            (err) => console.error(err)
