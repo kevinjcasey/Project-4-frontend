@@ -14,12 +14,12 @@ import {
   LinearProgress, 
   Toolbar, 
   Typography,
-   } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
+} from "@mui/material"
+
+import PreviewIcon from '@mui/icons-material/Preview'
 
 // =========== Card Flip ============ //
 
-import AllCards from './AllCards'
 import ReactCardFlip from "react-card-flip";
 
 // ============= MUI Carousel ============= //
@@ -49,7 +49,7 @@ const theme = createTheme({
 
 export const Home = (props) => {
 
-  // ============= CRUD functions ============= //
+// ============= CRUD functions ============= //
 
   const [flashcards, setFlashcards] = useState([])
 
@@ -109,7 +109,7 @@ export const Home = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-    {/* ----- Nav Bar ----- */}
+      {/* ----- Nav Bar ----- */}
       <AppBar 
         id="AppBar" 
         position="relative"
@@ -126,7 +126,7 @@ export const Home = (props) => {
             </Typography>
         </Toolbar>
       </AppBar>
-    {/* ----- App Name and Slogan ----- */}
+      {/* ----- App Name and Slogan ----- */}
       <Typography 
         variant="h2" 
         align="center" 
@@ -143,7 +143,7 @@ export const Home = (props) => {
       >
       Index Cards On the Flash
       </Typography>
-    {/* -------- Carousel ------- */}
+      {/* -------- Carousel ------- */}
       <div className="flashcards">
         <Typography 
           variant="h6" 
@@ -203,8 +203,9 @@ export const Home = (props) => {
                               size="large" 
                               color="primary" 
                               onClick={handleFlip}
+                              startIcon={<PreviewIcon />}
                             >
-                            Flip
+                            Show Answer
                             </Button>
                           </div>
                         </Card>

@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
 // ============ MUI components ============ //
 
 import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import PreviewIcon from '@mui/icons-material/Preview'
+
 import {
     Alert,
     AppBar,
@@ -14,11 +19,12 @@ import {
     CardContent,
     Container,
     Grid,
+    IconButton,
     Snackbar,
     TextField,
     Toolbar,
     Typography
-  } from '@mui/material'
+} from '@mui/material'
 
   // =========== AllCards stuff ============= //
 
@@ -46,7 +52,27 @@ import {
     footer: {
         padding: "40px 0",
     },
-}));
+  }));
+
+  // ============== MUI Theme ============== //
+
+  const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#9932cc'
+      }
+    },
+    typography: {
+      fontFamily: 'Fredoka',
+      fontWeightLight: '400',
+      fontWeightLight: '500',
+      fontWeightLight: '600',
+      fontWeightLight: '700',
+    }
+  })
+  // =========== ^^MUI Theme^^ ============= //
+
+
 
 // =========== ^^AllCards stuff^^ ============= //
 
@@ -182,22 +208,22 @@ export const Edit = () => {
                             </Typography>
                             : null }
                             {/* --- Edit Button --- */}
-                            <Button 
+                            <IconButton 
                               variant="contained" 
                               size="small" 
                               color="primary"
                               onClick={(event) => {handleEditDisplay(index)}}
                             >
-                            Edit
-                            </Button>
-                            <Button 
+                            <EditIcon />
+                            </IconButton>
+                            <IconButton 
                               variant="contained" 
                               size="small" 
                               color="secondary"
                               onClick={(event) => {handleAnswerDisplay(index)}}
                             >
-                            Show Answer
-                            </Button>
+                            <PreviewIcon />
+                            </IconButton>
                             { displayEditForm && selectIndex === index ? 
                             <Typography>
                             <center>
@@ -249,15 +275,15 @@ export const Edit = () => {
                           : null }
                           </CardContent>
                           <CardActions>
-                            <Button 
+                            <IconButton 
                                 onClick={(event) =>{handleDelete(event, flashcard)}} 
                                 value={flashcard.id}
                                 variant="contained"
                                 color="error"
                                 startIcon={<DeleteIcon />}
                             >
-                            Delete 
-                            </Button>
+                            <DeleteIcon />
+                            </IconButton>
                           </CardActions>
                         </Card>
                       </Grid>
@@ -285,7 +311,7 @@ export const Edit = () => {
     })
 
     return (
-        <>
+      <ThemeProvider theme={theme}>
         <AppBar
         id="AppBar"
         position="relative"
@@ -305,14 +331,22 @@ export const Edit = () => {
         </AppBar>
         {flashcardArray}
         <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-              Footer
+          <Typography 
+            variant="h6" 
+            align="center" 
+            gutterBottom
+          >
+          Footer
           </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
+          <Typography 
+            variant="subtitle1" 
+            align="center" 
+            color="textSecondary"
+          >
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
           </Typography>
         </footer>
-        </>
+      </ThemeProvider>
     )   
 }
 
