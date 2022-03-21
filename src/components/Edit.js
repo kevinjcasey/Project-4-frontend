@@ -37,10 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
     cardGrid: {
         padding: "20px 0",
+        width: "800px",
     },
     card: {
         height: "100%",
-        width: " 600px",
+        width: " 400px",
         display: "flex",
         flexDirection: "column",
         padding: "20px",
@@ -60,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
         },
         marginRight: "16px",
         fontFamily: "Fredoka",
+    },
+    cardContainer: {
+        width: "500px",
     },
 }));
 
@@ -169,107 +173,103 @@ export const Edit = () => {
     const flashcardArray = flashcards.map((flashcard, index) => {
         return (
             <div className="flashcard" key={flashcard._id}>
-                <Container className={classes.cardGrid} maxWidth="md">
-                    <Grid container>
-                        <Container className={classes.cardGrid} maxWidth="md">
-                            <Grid container justifyContent="center" gap="20px">
-                                <div>
-                                    <Grid item spacing={6} xs={12} sm={6} md={4} key="front">
-                                        <Card className={classes.card}>
-                                            <CardContent className={classes.cardContent}>
-                                                <Typography gutterBottom variant="h5">
-                                                    Subject: {flashcard.subject}
-                                                </Typography>
-                                                <Typography variant="h6">Question: {flashcard.question}</Typography>
-                                                {displayAnswer && selectIndex === index ? <Typography variant="h6">Answer: {flashcard.answer}</Typography> : null}
+                <Container className={classes.cardGrid}>
+                    <Grid container spacing={4}>
+                        <div>
+                            <Grid item spacing={6} xs={12} sm={6} md={4} key="front">
+                                <Card className={classes.card}>
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography gutterBottom variant="h5">
+                                            Subject: {flashcard.subject}
+                                        </Typography>
+                                        <Typography variant="h6">Question: {flashcard.question}</Typography>
+                                        {displayAnswer && selectIndex === index ? <Typography variant="h6">Answer: {flashcard.answer}</Typography> : null}
 
-                                                {displayEditForm && selectIndex === index ? (
-                                                    <Typography>
-                                                        <form id="editForm" onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
-                                                            <TextField
-                                                                label="Subject"
-                                                                id="standard-size-small"
-                                                                size="small"
-                                                                // variant="standard"
-                                                                type="text"
-                                                                name="subject"
-                                                                defaultValue={flashcard.subject}
-                                                                onChange={handleChange}
-                                                            />
-                                                            <br />
-                                                            <br />
+                                        {displayEditForm && selectIndex === index ? (
+                                            <Typography>
+                                                <form id="editForm" onSubmit={(event) => handleSubmit(event, flashcard.id, index)}>
+                                                    <TextField
+                                                        label="Subject"
+                                                        id="standard-size-small"
+                                                        size="small"
+                                                        // variant="standard"
+                                                        type="text"
+                                                        name="subject"
+                                                        defaultValue={flashcard.subject}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <br />
+                                                    <br />
 
-                                                            <TextField
-                                                                label="Question"
-                                                                id="standard-size-small"
-                                                                size="small"
-                                                                // variant="standard"
-                                                                type="text"
-                                                                name="question"
-                                                                defaultValue={flashcard.question}
-                                                                onChange={handleChange}
-                                                            />
-                                                            <br />
-                                                            <br />
+                                                    <TextField
+                                                        label="Question"
+                                                        id="standard-size-small"
+                                                        size="small"
+                                                        // variant="standard"
+                                                        type="text"
+                                                        name="question"
+                                                        defaultValue={flashcard.question}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <br />
+                                                    <br />
 
-                                                            <TextField
-                                                                label="Answer"
-                                                                id="filled-size-small"
-                                                                size="small"
-                                                                // variant="standard"
-                                                                type="text"
-                                                                name="answer"
-                                                                defaultValue={flashcard.answer}
-                                                                onChange={handleChange}
-                                                            />
-                                                            <br />
-                                                            <br />
-                                                            <Button type="submit" onclick={clearFlashcard} variant="contained" color="primary">
-                                                                Submit
-                                                            </Button>
-                                                        </form>
-                                                    </Typography>
-                                                ) : null}
-                                            </CardContent>
-                                            <CardActions>
-                                                <Button
-                                                    onClick={(event) => {
-                                                        handleDelete(event, flashcard);
-                                                    }}
-                                                    value={flashcard.id}
-                                                    variant="contained"
-                                                    color="error"
-                                                    startIcon={<DeleteIcon />}
-                                                >
-                                                    Delete
-                                                </Button>
-                                                {/* --- Edit Button --- */}
-                                                <Button
-                                                    variant="contained"
-                                                    size="medium"
-                                                    color="primary"
-                                                    onClick={(event) => {
-                                                        handleEditDisplay(index);
-                                                    }}
-                                                >
-                                                    Edit
-                                                </Button>
-                                                <Button
-                                                    variant="outlined"
-                                                    size="medium"
-                                                    color="primary"
-                                                    onClick={(event) => {
-                                                        handleAnswerDisplay(index);
-                                                    }}
-                                                >
-                                                    Show Answer
-                                                </Button>
-                                            </CardActions>
-                                        </Card>
-                                    </Grid>
-                                </div>
+                                                    <TextField
+                                                        label="Answer"
+                                                        id="filled-size-small"
+                                                        size="small"
+                                                        // variant="standard"
+                                                        type="text"
+                                                        name="answer"
+                                                        defaultValue={flashcard.answer}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <br />
+                                                    <br />
+                                                    <Button type="submit" onclick={clearFlashcard} variant="contained" color="primary">
+                                                        Submit
+                                                    </Button>
+                                                </form>
+                                            </Typography>
+                                        ) : null}
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button
+                                            onClick={(event) => {
+                                                handleDelete(event, flashcard);
+                                            }}
+                                            value={flashcard.id}
+                                            variant="contained"
+                                            color="error"
+                                            startIcon={<DeleteIcon />}
+                                        >
+                                            Delete
+                                        </Button>
+                                        {/* --- Edit Button --- */}
+                                        <Button
+                                            variant="contained"
+                                            size="medium"
+                                            color="primary"
+                                            onClick={(event) => {
+                                                handleEditDisplay(index);
+                                            }}
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            variant="outlined"
+                                            size="medium"
+                                            color="primary"
+                                            onClick={(event) => {
+                                                handleAnswerDisplay(index);
+                                            }}
+                                        >
+                                            Show Answer
+                                        </Button>
+                                    </CardActions>
+                                </Card>
                             </Grid>
-                        </Container>
+                        </div>
                     </Grid>
                 </Container>
                 {/* ----- SnackBar alert ----- */}
@@ -316,8 +316,12 @@ export const Edit = () => {
                 <Typography variant="h5" align="center">
                     Index Card Gallery:
                 </Typography>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid className={classes.cardContainer} container justifyContent="center" gap="20px">
+                        {flashcardArray}
+                    </Grid>
+                </Container>
 
-                {flashcardArray}
                 <footer className={classes.footer}>
                     <Typography variant="h6" align="center" gutterBottom>
                         Footer
