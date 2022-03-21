@@ -195,14 +195,14 @@ export const Edit = () => {
 
     const flashcardArray = flashcards.map((flashcard, index) => {
         return (
-            <div className="flashcard" key={flashcard._id}>
+            <div className="flashcard" key={flashcard.id}>
                 <Container className={classes.cardGrid}>
                     <Grid container spacing={4}>
                         <div>
-                            <Grid item spacing={6} xs={12} sm={6} md={4} key="front">
+                            <Grid item key="front">
                                 <Card className={classes.card}>
                                     <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5">
+                                        <Typography  variant="h5">
                                             Subject: {flashcard.subject}
                                         </Typography>
                                         <Typography variant="h6">Question: {flashcard.question}</Typography>
@@ -264,12 +264,12 @@ export const Edit = () => {
                                     </CardContent>
                                     <CardActions>
                                         <IconButton 
-                                          // onClick={(event) => {handleDelete(event, flashcard)}} 
                                           value={flashcard.id}
-                                          // variant="contained"
+                                          variant="contained"
                                           color="error"
+                                          onClick={(event) => {handleDelete(event, flashcard)}} 
                                         >
-                                          <DeleteIcon onClick={(event) => {handleDelete(event, flashcard)}} />
+                                          <DeleteIcon />
                                         </IconButton>
                                         {/* --- Edit Button --- */}
                                         <IconButton 
@@ -307,7 +307,7 @@ export const Edit = () => {
 
     return (
       <ThemeProvider theme={theme}>
-        <AppBar id="AppBar" position="relative" gutterBottom>
+        <AppBar id="AppBar" position="relative">
                     <Toolbar className="toolbar">
                         <Typography variant="h6">
                             <Link className={classes.AppBarLinks} to="/">
@@ -327,7 +327,7 @@ export const Edit = () => {
                     </Toolbar>
                 </AppBar>
         {/* ----- App Name and Slogan ----- */}
-                <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+                <Typography variant="h2" align="center" color="textPrimary" >
                     FlashPrep
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
@@ -346,7 +346,7 @@ export const Edit = () => {
         <AppBar
           id="AppBar"
           position="fixed"
-          gutterBottom
+          
           className='app'
           sx={{ top: 'auto', bottom: -40 }}
         >

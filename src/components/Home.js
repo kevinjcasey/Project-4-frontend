@@ -153,7 +153,7 @@ export const Home = (props) => {
   return (
     <ThemeProvider theme={theme}>
       {/* ----- Nav Bar ----- */}
-     <AppBar id="AppBar" position="relative" gutterBottom>
+     <AppBar id="AppBar" position="relative" >
                 <Toolbar>
                     <Typography style={{ textDecoration: "none" }} variant="h6">
                         <Link className={classes.AppBarLinks} to="/">
@@ -178,7 +178,7 @@ export const Home = (props) => {
         variant="h2" 
         align="center" 
         color="textPrimary" 
-        gutterBottom
+        
       >
       FlashPrep
       </Typography>
@@ -233,7 +233,7 @@ export const Home = (props) => {
                       <div>
                         <Card className="Card1">
                           <Typography 
-                            gutterBottom padding="30px" 
+                             padding="30px" 
                             variant="h3"
                           >
                           Subject: {flashcard.subject}
@@ -263,7 +263,7 @@ export const Home = (props) => {
                         <Card className="Card1">
                           <CardContent>
                             <Typography 
-                              gutterBottom 
+                               
                               paddingTop="20px" 
                               marginBottom="80px" 
                               variant="h3"
@@ -305,7 +305,6 @@ export const Home = (props) => {
       <AppBar
           id="AppBar"
           position="fixed"
-          gutterBottom
           className='app'
           sx={{ top: 'auto', bottom: -40 }}
         >

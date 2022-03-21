@@ -134,7 +134,7 @@ export const Add = () => {
 
   return (
     <ThemeProvider theme={theme}>
-                <AppBar id="AppBar" position="relative" gutterBottom>
+                <AppBar id="AppBar" position="relative" >
                     <Toolbar>
                         <Typography style={{ textDecoration: "none" }} variant="h6">
                             <Link className={classes.AppBarLinks} to="/">
@@ -156,78 +156,85 @@ export const Add = () => {
                 </AppBar>
 
                 {/* ----- App Name and Slogan ----- */}
-                <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+                <Typography variant="h2" align="center" color="textPrimary" >
                     FlashPrep
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
                     Index Cards On the Flash
                 </Typography>
       <center>
-        <br/>
-        <h3>Add A New Flash Card</h3>
-        <br/>
-        <form onSubmit={handleSubmit}  id="addForm">
+        <Card className={classes.card} >
+          <br/>
+          <h3>Add A New Flash Card</h3>
+          <br/>
+          <form onSubmit={handleSubmit}  id="addForm">
 
-          <TextField
-            label='Subject'
-            name='subject'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}
-          />
-          <br/>
-          <br/>
-          <TextField
-            label='Question'
-            name='question'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}
-          />
-          <br/>
-          <br/>
-          <TextField
-            label='Answer'
-            name='answer'
-            id="outlined-size-small"
-            size="small"
-            type='text'
-            onChange={handleChange}
-          />
-          <br/>
-          <br/>
-          
-        <Button
-          type='submit'
-          variant="contained"
-          color="success"
-          onClick={handleClick}
-        >
-        Submit
-        </Button>
-
-        {/* --- SnackBar --- */}
-        <Snackbar 
-          open={open} 
-          autoHideDuration={3000} 
-          onClose={handleClose}
-        >
-          <Alert 
-            onClose={handleClose} 
-            severity="success" 
-            sx={{ width: '100%' }}
+            <TextField
+              label='Subject'
+              name='subject'
+              id="outlined-size-small"
+              size="small"
+              type='text'
+              onChange={handleChange}
+              multiline
+              rows={2}
+            />
+            <br/>
+            <br/>
+            <TextField
+              label='Question'
+              name='question'
+              id="outlined-size-small"
+              size="small"
+              type='text'
+              onChange={handleChange}
+              multiline
+              rows={2}
+            />
+            <br/>
+            <br/>
+            <TextField
+              label='Answer'
+              name='answer'
+              id="outlined-size-small"
+              size="small"
+              type='text'
+              onChange={handleChange}
+              multiline
+              rows={2}
+            />
+            <br/>
+            <br/>
+            
+          <Button
+            type='submit'
+            variant="contained"
+            color="success"
+            onClick={handleClick}
           >
-          Index Card Created
-          </Alert>
-        </Snackbar>
-        </form>
+          Submit
+          </Button>
+
+          {/* --- SnackBar --- */}
+          <Snackbar 
+            open={open} 
+            autoHideDuration={3000} 
+            onClose={handleClose}
+          >
+            <Alert 
+              onClose={handleClose} 
+              severity="success" 
+              sx={{ width: '100%' }}
+            >
+            Index Card Created
+            </Alert>
+          </Snackbar>
+          </form>
+        </Card>
       </center>
     <AppBar
         id="AppBar"
         position="fixed"
-        gutterBottom
         className='app'
         sx={{ top: 'auto', bottom: -40 }}
       >
