@@ -201,7 +201,7 @@ export const Home = (props) => {
             <Carousel
               className="carousel"
               autoPlay={false}
-              indicators={true}
+              indicators={false}
               navButtonsAlwaysVisible={true}
               animation="slide"
               duration="400"
