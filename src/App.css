@@ -37,7 +37,7 @@ body {
 }
 
 .Card1 {
-    height: 570px !important;
+    height: 360px !important;
 }
 
 /* .Card1 {
@@ -110,6 +110,18 @@ body {
 
     .cardsContainer {
         padding: 10px 0 !important;
+    }
+
+    .Card1 {
+        height: 361px !important;
+    }
+
+    .carousel {
+        width: 373px;
+    }
+
+    #progressBar {
+        width: 373px;
     }
 }
 

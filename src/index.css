@@ -48,11 +48,6 @@ code {
     color: darkmagenta;
 }
 
-@media (max-width: 600px) {
-    .toolbar {
-    }
-}
-
 .logo {
     width: 313px;
     border-radius: 10px;
@@ -61,4 +56,10 @@ code {
     margin-right: auto;
     box-shadow: 5px 5px rgba(139, 192, 216);
     margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        width: 200px;
+    }
 }

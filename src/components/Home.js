@@ -88,7 +88,8 @@ const useStyles = makeStyles((theme) => ({
         // marginBottom: "80px !important",
         "@media (max-width:600px)": {
             padding: "30px",
-            marginBottom: "50px !important",
+            marginBottom: "0px !important",
+            fontSize: "1.5em !important",
         },
     },
     AnswerStyle: {
@@ -97,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
         "@media (max-width:600px)": {
             padding: "30px",
             marginBottom: "50px !important",
+            fontSize: ".7em",
         },
     },
 }));
