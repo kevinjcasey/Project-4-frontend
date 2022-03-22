@@ -12,7 +12,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-image: linear-gradient(359.3deg, rgba(196, 214, 252, 1) 1%, rgba(187, 187, 187, 0) 70.9%);
     /* This drops it for all pages */
-    height: 2000px;
+    height: 1000px;
 }
 
 code {
@@ -24,19 +24,20 @@ code {
   background-repeat: no-repeat;
   background-size: cover; */
     padding-bottom: 100px;
-    background-image: linear-gradient(178deg, rgba(201, 234, 252, 0.51) 14.9%, rgba(139, 192, 216, 0.73) 80%);
+    background: transparent;
 }
 
 .toolbar {
     display: flex;
     justify-content: start;
+    padding: 0 !important;
 }
 
 /* ============ Footer CSS =========== */
 
-.footer{
-  display: flex;
-  justify-content: space-between;
+.footer {
+    display: flex;
+    justify-content: space-between;
 }
 
 .footer a {
@@ -44,7 +45,12 @@ code {
 }
 
 .footer a:hover {
-  color: darkmagenta;
+    color: darkmagenta;
+}
+
+@media (max-width: 600px) {
+    .toolbar {
+    }
 }
 
 .logo {

@@ -4,28 +4,13 @@ import { Link } from "react-router-dom";
 
 // ============ MUI components ============ //
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import PreviewIcon from "@mui/icons-material/Preview";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
-import PreviewIcon from '@mui/icons-material/Preview'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import GitHubIcon from '@mui/icons-material/GitHub'
-
-import {
-    Alert,
-    AppBar,
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    Container,
-    Grid,
-    IconButton,
-    Snackbar,
-    TextField,
-    Toolbar,
-    Typography
-} from '@mui/material'
+import { Alert, AppBar, Button, Card, CardActions, CardContent, Container, Grid, IconButton, Snackbar, TextField, Toolbar, Typography } from "@mui/material";
 
 import { makeStyles } from "@mui/styles";
 
@@ -33,22 +18,21 @@ import { makeStyles } from "@mui/styles";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-  const theme = createTheme({
+const theme = createTheme({
     palette: {
-      secondary: {
-        main: '#9932cc'
-      }
+        secondary: {
+            main: "#9932cc",
+        },
     },
     typography: {
-      fontFamily: 'Fredoka',
-      fontWeightLight: '400',
-      fontWeightLight: '500',
-      fontWeightLight: '600',
-      fontWeightLight: '700',
-    }
-  })
+        fontFamily: "Fredoka",
+        fontWeightLight: "400",
+        fontWeightLight: "500",
+        fontWeightLight: "600",
+        fontWeightLight: "700",
+    },
+});
 // =========== ^^MUI Theme^^ ============= //
-
 
 // =========== AllCards stuff ============= //
 
@@ -61,17 +45,21 @@ const useStyles = makeStyles((theme) => ({
     cardGrid: {
         padding: "20px 0",
         width: "800px",
+        // paddingBottom: "40px",
     },
     card: {
         height: "100%",
         width: " 400px",
+        "@media (max-width:600px)": {
+            width: "367px",
+        },
         display: "flex",
         flexDirection: "column",
         padding: "20px",
     },
 
     CardContent: {
-        flexGrow: 1,
+        height: "300px !important",
     },
     footer: {
         padding: "40px 0",
@@ -83,6 +71,12 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "1.1em",
         },
         marginRight: "16px",
+        "@media (max-width:600px)": {
+            fontSize: ".9em",
+            "&:hover": {
+                fontSize: ".95em",
+            },
+        },
         fontFamily: "Fredoka",
     },
     cardContainer: {
@@ -113,7 +107,7 @@ export const Edit = () => {
     };
 
     const handleDelete = (event, deletedFlashcards) => {
-        axios.delete("http://localhost:8000/api/flashcards/" + event.target.value).then((response) => {
+        axios.delete("https://flashcards-backend-ga.herokuapp.com/api/flashcards/" + event.target.value).then((response) => {
             setFlashcards(flashcards.filter((x) => x.id !== deletedFlashcards.id));
         });
         handleClick();
@@ -131,13 +125,13 @@ export const Edit = () => {
             flashcard.answer = flashcards[index].answer;
         }
         axios
-            .put(`http://localhost:8000/api/flashcards/` + id, {
+            .put(`https://flashcards-backend-ga.herokuapp.com/api/flashcards/` + id, {
                 subject: flashcard.subject,
                 question: flashcard.question,
                 answer: flashcard.answer,
             })
             .then(() => {
-                axios.get("http://localhost:8000/api/flashcards").then((response) => {
+                axios.get("https://flashcards-backend-ga.herokuapp.com/api/flashcards").then((response) => {
                     setFlashcards(response.data);
                 });
             });
@@ -188,7 +182,7 @@ export const Edit = () => {
 
     // ============ UseEffect ================ //
     useEffect(() => {
-        axios.get("http://localhost:8000/api/flashcards").then((response) => {
+        axios.get("https://flashcards-backend-ga.herokuapp.com/api/flashcards").then((response) => {
             setFlashcards(response.data);
         });
     }, []);
@@ -201,10 +195,8 @@ export const Edit = () => {
                         <div>
                             <Grid item key="front">
                                 <Card className={classes.card}>
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography  variant="h5">
-                                            Subject: {flashcard.subject}
-                                        </Typography>
+                                    <CardContent id="cardContent" className={classes.cardContent}>
+                                        <Typography variant="h5">Subject: {flashcard.subject}</Typography>
                                         <Typography variant="h6">Question: {flashcard.question}</Typography>
                                         {displayAnswer && selectIndex === index ? <Typography variant="h6">Answer: {flashcard.answer}</Typography> : null}
 
@@ -263,49 +255,49 @@ export const Edit = () => {
                                         ) : null}
                                     </CardContent>
                                     <CardActions>
-                                        <Button 
-                                          value={flashcard.id}
-                                          variant="contained"
-                                          color="error"
-                                          size="medium"
-                                          startIcon={<DeleteIcon />}
-                                          onClick={(event) => {handleDelete(event, flashcard)}} 
+                                        <Button
+                                            value={flashcard.id}
+                                            variant="contained"
+                                            color="error"
+                                            size="medium"
+                                            startIcon={<DeleteIcon />}
+                                            onClick={(event) => {
+                                                handleDelete(event, flashcard);
+                                            }}
                                         >
-                                          Delete
+                                            Delete
                                         </Button>
                                         {/* --- Edit Button --- */}
-                                        <Button 
-                                          variant="contained" 
-                                          color="primary"
-                                          size="medium"
-                                          startIcon={<EditIcon />}
-                                          onClick={(event) => {handleEditDisplay(index)}}
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            size="medium"
+                                            startIcon={<EditIcon />}
+                                            onClick={(event) => {
+                                                handleEditDisplay(index);
+                                            }}
                                         >
-                                          Edit
+                                            Edit
                                         </Button>
-                                        <Button 
-                                          variant="outlined"
-                                          color="primary"
-                                          size="medium"
-                                          startIcon={<PreviewIcon />}
-                                          onClick={(event) => {handleAnswerDisplay(index)}}
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            size="medium"
+                                            startIcon={<PreviewIcon />}
+                                            onClick={(event) => {
+                                                handleAnswerDisplay(index);
+                                            }}
                                         >
-                                          Answer
+                                            Answer
                                         </Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
                         </div>
                     </Grid>
-
                 </Container>
                 {/* ----- SnackBar alert ----- */}
-                <Snackbar 
-                  open={open} 
-                  autoHideDuration={2000} 
-                  onClose={handleClose}
-                  anchorOrigin={{ vertical: 'top', horizontal: 'center'}}
-                >
+                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
                         Index Card Deleted
                     </Alert>
@@ -315,71 +307,79 @@ export const Edit = () => {
     });
 
     return (
-      <ThemeProvider theme={theme}>
-        <AppBar id="AppBar" position="relative">
-                    <Toolbar className="toolbar">
-                        <Typography variant="h6">
-                            <Link className={classes.AppBarLinks} to="/">
-                                Home
-                            </Link>
-                        </Typography>
-                        <Typography variant="h6">
-                            <Link className={classes.AppBarLinks} to="/add">
-                                Add Flashcard
-                            </Link>
-                        </Typography>
-                        <Typography variant="h6">
-                            <Link className={classes.AppBarLinks} to="/edit">
-                                View All Flashcards
-                            </Link>
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-        {/* ----- App Name and Slogan ----- */}
-                <Typography variant="h2" align="center" color="textPrimary" >
-                    FlashPrep
-                </Typography>
-                <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                    Index Cards On the Flash
-                </Typography>
+        <ThemeProvider theme={theme}>
+            <AppBar id="AppBar" position="relative">
+                <Toolbar className="toolbar">
+                    <Typography paddingLeft="16px" variant="h6">
+                        <Link className={classes.AppBarLinks} to="/">
+                            Home
+                        </Link>
+                    </Typography>
+                    <Typography variant="h6">
+                        <Link className={classes.AppBarLinks} to="/add">
+                            Add Flashcard
+                        </Link>
+                    </Typography>
+                    <Typography variant="h6">
+                        <Link className={classes.AppBarLinks} to="/edit">
+                            View All Flashcards
+                        </Link>
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            {/* ----- App Name and Slogan ----- */}
+            <Typography variant="h2" align="center" color="textPrimary">
+                FlashPrep
+            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                Index Cards On the Flash
+            </Typography>
 
-                <Typography variant="h5" align="center">
-                    Index Card Gallery:
-                </Typography>
-        
-        <Container className={classes.cardGrid} maxWidth="md">
+            <Typography variant="h5" align="center">
+                Index Card Gallery:
+            </Typography>
+
+            <div className="cardsContainer">
+                <Container className={classes.cardGrid} maxWidth="md">
                     <Grid className={classes.cardContainer} container justifyContent="center" gap="20px">
                         {flashcardArray}
                     </Grid>
                 </Container>
-        <AppBar
-          id="AppBar"
-          position="fixed"
-          
-          className='app'
-          sx={{ top: 'auto', bottom: -40 }}
-        >
-          <Toolbar className='footer'>
-            <div>
-              <a  className='link'href='https://www.linkedin.com/in/kris-garcia-3b7292146/'><LinkedInIcon/></a>
-              <a className='git' href='https://github.com/Weeechi'><GitHubIcon className='gitKris'/></a>
-              <h4>Kris Garcia</h4>
             </div>
-            <div className='div'>
-              <a  className='link'href='https://www.linkedin.com/in/kevin-j-casey/'><LinkedInIcon/></a>
-              <a  href='https://github.com/kevinjcasey'><GitHubIcon className='gitKev'/></a>
-              <h4 className='namekev'>Kevin J Casey</h4>
-            </div>
-            <div className='div'>
-              <a  className='link'href='https://www.linkedin.com/in/angelvalentin1/'><LinkedInIcon/></a>
-              <a className='gitAngel' href='https://github.com/angelgvalentin'><GitHubIcon className='gitAngel'/></a>
-            <h4 className='namekev'>Angel Valentin</h4>
-           </div>
-          </Toolbar>
-        </AppBar>
-      </ThemeProvider>
-    )   
-}
+            <AppBar id="AppBar" position="fixed" className="app" sx={{ top: "auto", bottom: -40 }}>
+                <Toolbar className="footer">
+                    <div>
+                        <a className="link" href="https://www.linkedin.com/in/kris-garcia-3b7292146/">
+                            <LinkedInIcon />
+                        </a>
+                        <a className="git" href="https://github.com/Weeechi">
+                            <GitHubIcon className="gitKris" />
+                        </a>
+                        <h4>Kris Garcia</h4>
+                    </div>
+                    <div className="div">
+                        <a className="link" href="https://www.linkedin.com/in/kevin-j-casey/">
+                            <LinkedInIcon />
+                        </a>
+                        <a href="https://github.com/kevinjcasey">
+                            <GitHubIcon className="gitKev" />
+                        </a>
+                        <h4 className="namekev">Kevin J Casey</h4>
+                    </div>
+                    <div className="div">
+                        <a className="link" href="https://www.linkedin.com/in/angelvalentin1/">
+                            <LinkedInIcon />
+                        </a>
+                        <a className="gitAngel" href="https://github.com/angelgvalentin">
+                            <GitHubIcon className="gitAngel" />
+                        </a>
+                        <h4 className="namekev">Angel Valentin</h4>
+                    </div>
+                </Toolbar>
+            </AppBar>
+        </ThemeProvider>
+    );
+};
 
 export default Edit;
 
