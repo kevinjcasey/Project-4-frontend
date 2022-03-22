@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import FlashPrep from "../images/FlashPrep.png"
 
 // ============ MUI components ============ //
 
@@ -12,6 +13,7 @@ import {
   Card, 
   CardActions, 
   CardContent,
+  Checkbox,
   LinearProgress, 
   Toolbar, 
   Typography,
@@ -20,6 +22,9 @@ import {
 import PreviewIcon from '@mui/icons-material/Preview'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import StarOutlineIcon from '@mui/icons-material/StarOutline'
+import StarIcon from '@mui/icons-material/Star';
+
 
 import { makeStyles } from "@mui/styles";
 
@@ -92,7 +97,6 @@ export const Home = (props) => {
 
   const [flashcards, setFlashcards] = useState([]);
 
-
   const getFlashcard = () => {
     axios
          .get('http://localhost:8000/api/flashcards')
@@ -103,27 +107,39 @@ export const Home = (props) => {
          .catch((error) => console.error(error))
   }
 
-
-    // =========== Progress Bar =========== //
-
+// =========== Progress Bar =========== //
 
   const [progress, setProgress] = useState(0)
+  
+  const [checked, setChecked] = useState(false)
 
-  const arrayOfNumbers = [1,2,3,4,5]
-
-  const progressFunction = () => {
-  //   if (flashcards.question == flashcards[0]) {
+  // const progressFunction = () => {
+  //   if (checked) {
   //     setProgress(progress + 10)
-  //   } else if (flashcards.question == flashcards[1]) {
-      setProgress(progress + 10)
+  //   } else if (!checked) {
+  //     setProgress(progress - 10)
   //   }
+  // } 
+
+  const starCheck = () => {
+    if (!checked) {
+      setChecked(!checked)
+      setProgress(progress + 10)
+    } else if (checked) {
+      setChecked(!checked)
+      setProgress(progress - 10)
+    }
   }
+
+  console.log(progress);
+  console.log(checked);
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
     // if children.index = 2
     // display "in" progress bar '2 out of <children.length>'
 
+    // Maybe make a checkbox (star) button on each card that when checked, increases the progress bar?
 
     // Try messing around with props inside LinearProgress componenet?
 
@@ -174,22 +190,23 @@ export const Home = (props) => {
                 </Toolbar>
             </AppBar>
       {/* ----- App Name and Slogan ----- */}
-      <Typography 
+      {/* <Typography 
         variant="h2" 
         align="center" 
         color="textPrimary" 
         
       >
       FlashPrep
-      </Typography>
-      <Typography 
+      </Typography> */}
+      <img src={FlashPrep} className="logo" />
+      {/* <Typography 
         variant="h5" 
         align="center" 
         color="textSecondary" 
         paragraph
       >
       Index Cards On the Flash
-      </Typography>
+      </Typography> */}
       {/* -------- Carousel ------- */}
       <div className="flashcards">
         <Typography 
@@ -207,8 +224,8 @@ export const Home = (props) => {
               duration="400"
               swipe="true"
               // index={2}
-              onChange={progressFunction}
-              IndicatorIcon={arrayOfNumbers}
+              // onChange={progressFunction}
+              // IndicatorIcon={arrayOfNumbers}
               NavButton={({ onClick, className, style, next, prev }) => {
                 return (
                   <Button 
@@ -256,6 +273,15 @@ export const Home = (props) => {
                             Show Answer
                             </Button>
                           </div>
+                          <Checkbox 
+                            // onChange={progressFunction}
+                            onChange={starCheck}
+                            icon={<StarOutlineIcon fontSize="large" />}
+                            checkedIcon={<StarIcon fontSize="large" />}
+                            // checked={false}
+                            // required
+                            // need value?
+                          />
                         </Card>
                       </div>
                       {/* --- Back of card --- */}
