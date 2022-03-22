@@ -105,50 +105,53 @@ const useStyles = makeStyles((theme) => ({
 // =========== ^^MUI Theme^^ ============= //
 
 export const Home = (props) => {
-    // ============= CRUD functions ============= //
 
-    // ============= CRUD functions ============= //
+// ============= CRUD functions ============= //
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const [flashcards, setFlashcards] = useState([]);
+  const [flashcards, setFlashcards] = useState([]);
 
-    const getFlashcard = () => {
-        axios
-            .get("https://flashcards-backend-ga.herokuapp.com/api/flashcards")
-            .then(
-                (response) => setFlashcards(response.data),
-                (err) => console.error(err)
-            )
-            .catch((error) => console.error(error));
-    };
+  const getFlashcard = () => {
+    axios
+         .get('http://localhost:8000/api/flashcards')
+         .then(
+           (response) => setFlashcards(response.data),
+           (err) => console.error(err)
+         )
+         .catch((error) => console.error(error))
+  }
 
-    // =========== Progress Bar =========== //
+// =========== Progress Bar =========== //
 
-    const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0)
+  
+  const [checked, setChecked] = useState(true)
 
-    const [checked, setChecked] = useState(false);
+  const [selectIndex, setSelectIndex] = useState(0);
 
-    const progressFunction = () => {
-        if (checked) {
-            setProgress(progress + 10);
-        } else if (!checked) {
-            setProgress(progress - 10);
-        }
-    };
+  // const progressFunction = () => {
+  //   if (checked) {
+  //     setProgress(progress + 10)
+  //   } else if (!checked) {
+  //     setProgress(progress - 10)
+  //   }
+  // } 
 
-    const starCheck = () => {
-        if (!checked) {
-            setChecked(!checked);
-            setProgress(progress + 10);
-        } else if (checked) {
-            setChecked(!checked);
-            setProgress(progress - 10);
-        }
-    };
+  const starCheck = (index) => {
+    // if (checked) {
+      // setSelectIndex(index)
+      // setChecked(!checked)
+      setProgress(progress + 10)
+    // } else if (!checked) {
+    //   setSelectIndex(index)
+    //   setChecked(checked)
+    //   setProgress(progress - 10)
+    // }
+  }
 
-    console.log(progress);
-    console.log(checked);
+  // console.log(progress);
+  // console.log(checked);
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
@@ -205,7 +208,6 @@ export const Home = (props) => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-
             <img src={FlashPrep} className="logo" />
             {/* -------- Carousel ------- */}
             <div className="flashcards">
@@ -252,15 +254,17 @@ export const Home = (props) => {
                                                             Show Answer
                                                         </Button>
                                                     </div>
-                                                    <Checkbox
-                                                        // onChange={progressFunction}
-                                                        onChange={starCheck}
+                                                      {/* {selectIndex === index ?  */}
+                                                      <Checkbox 
+                                                        onClick={() => {starCheck(index)}}
                                                         icon={<StarOutlineIcon fontSize="large" />}
                                                         checkedIcon={<StarIcon fontSize="large" />}
-                                                        // checked={false}
+                                                        // checked={!checked}
                                                         // required
                                                         // need value?
-                                                    />
+                                                      />
+                                                      {/* : null } */}
+                                                    </Card>
                                                 </Card>
                                             </div>
                                             {/* --- Back of card --- */}
