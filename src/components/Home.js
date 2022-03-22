@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import FlashPrep from "../images/FlashPrep.png"
 
 // ============ MUI components ============ //
 
 import "../App.css";
-import { AppBar, Button, Card, CardActions, CardContent, LinearProgress, Toolbar, Typography } from "@mui/material";
 
-import PreviewIcon from "@mui/icons-material/Preview";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import { 
+  AppBar, 
+  Button, 
+  Card, 
+  CardActions, 
+  CardContent,
+  Checkbox,
+  LinearProgress, 
+  Toolbar, 
+  Typography,
+} from "@mui/material"
+
+import PreviewIcon from '@mui/icons-material/Preview'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import StarOutlineIcon from '@mui/icons-material/StarOutline'
+import StarIcon from '@mui/icons-material/Star';
 
 import { makeStyles } from "@mui/styles";
 
@@ -91,38 +105,57 @@ const useStyles = makeStyles((theme) => ({
 export const Home = (props) => {
     // ============= CRUD functions ============= //
 
-    const classes = useStyles();
 
-    const [flashcards, setFlashcards] = useState([]);
+// ============= CRUD functions ============= //
 
-    const getFlashcard = () => {
-        axios
-            .get("https://flashcards-backend-ga.herokuapp.com/api/flashcards")
-            .then(
-                (response) => setFlashcards(response.data),
-                (err) => console.error(err)
-            )
-            .catch((error) => console.error(error));
-    };
+  const classes = useStyles();
 
-    // =========== Progress Bar =========== //
+  const [flashcards, setFlashcards] = useState([]);
 
-    const [progress, setProgress] = useState(0);
+  const getFlashcard = () => {
+    axios
+         .get('http://localhost:8000/api/flashcards')
+         .then(
+           (response) => setFlashcards(response.data),
+           (err) => console.error(err)
+         )
+         .catch((error) => console.error(error))
+  }
 
-    const arrayOfNumbers = [1, 2, 3, 4, 5];
+// =========== Progress Bar =========== //
 
-    const progressFunction = () => {
-        //   if (flashcards.question == flashcards[0]) {
-        //     setProgress(progress + 10)
-        //   } else if (flashcards.question == flashcards[1]) {
-        setProgress(progress + 10);
-        //   }
-    };
+  const [progress, setProgress] = useState(0)
+  
+  const [checked, setChecked] = useState(false)
+
+  // const progressFunction = () => {
+  //   if (checked) {
+  //     setProgress(progress + 10)
+  //   } else if (!checked) {
+  //     setProgress(progress - 10)
+  //   }
+  // } 
+
+  const starCheck = () => {
+    if (!checked) {
+      setChecked(!checked)
+      setProgress(progress + 10)
+    } else if (checked) {
+      setChecked(!checked)
+      setProgress(progress - 10)
+    }
+  }
+
+  console.log(progress);
+  console.log(checked);
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
     // if children.index = 2
     // display "in" progress bar '2 out of <children.length>'
+
+
+    // Maybe make a checkbox (star) button on each card that when checked, increases the progress bar?
 
     // Try messing around with props inside LinearProgress componenet?
 
@@ -173,13 +206,8 @@ export const Home = (props) => {
                 </Toolbar>
             </AppBar>
 
-            {/* ----- App Name and Slogan ----- */}
-            <Typography variant="h2" align="center" color="textPrimary">
-                FlashPrep
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Index Cards On the Flash
-            </Typography>
+
+            <img src={FlashPrep} className="logo" />
             {/* -------- Carousel ------- */}
             <div className="flashcards">
                 <Typography variant="h6" color="primary" align="center">
@@ -222,6 +250,15 @@ export const Home = (props) => {
                                                         <Button variant="contained" size="large" color="primary" onClick={handleFlip} startIcon={<PreviewIcon />}>
                                                             Show Answer
                                                         </Button>
+                                                      <Checkbox 
+                                                        // onChange={progressFunction}
+                                                        onChange={starCheck}
+                                                        icon={<StarOutlineIcon fontSize="large" />}
+                                                        checkedIcon={<StarIcon fontSize="large" />}
+                                                        // checked={false}
+                                                        // required
+                                                        // need value?
+                                                      />
                                                     </div>
                                                 </Card>
                                             </div>
@@ -251,7 +288,6 @@ export const Home = (props) => {
                         <LinearProgress id="progressBar" sx={{ paddingTop: "20px", margin: "20px" }} variant="determinate" value={progress} />
                     </div>
                 </Typography>
-                \
             </div>
             <AppBar id="AppBar" position="fixed" className="app" sx={{ top: "auto", bottom: -40 }}>
                 <Toolbar className="footer">

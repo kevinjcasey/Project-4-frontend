@@ -29,7 +29,6 @@ code {
 
 .toolbar {
     display: flex;
-
     justify-content: start;
     padding: 0 !important;
 }
@@ -52,4 +51,14 @@ code {
 @media (max-width: 600px) {
     .toolbar {
     }
+}
+
+.logo {
+  width: 40%;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 5px 5px rgba(139, 192, 216);
+  margin-bottom: 2rem;
 }
