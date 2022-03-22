@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import FlashPrep from "../images/FlashPrep.png"
+import FlashPrep from "../images/FlashPrep.png";
 
 // ============ MUI components ============ //
 
 import "../App.css";
 
-import { 
-  AppBar, 
-  Button, 
-  Card, 
-  CardActions, 
-  CardContent,
-  Checkbox,
-  LinearProgress, 
-  Toolbar, 
-  Typography,
-} from "@mui/material"
+import { AppBar, Button, Card, CardActions, CardContent, Checkbox, LinearProgress, Toolbar, Typography } from "@mui/material";
 
-import PreviewIcon from '@mui/icons-material/Preview'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import StarOutlineIcon from '@mui/icons-material/StarOutline'
-import StarIcon from '@mui/icons-material/Star';
+import PreviewIcon from "@mui/icons-material/Preview";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import StarIcon from "@mui/icons-material/Star";
 
 import { makeStyles } from "@mui/styles";
 
@@ -93,7 +83,17 @@ const useStyles = makeStyles((theme) => ({
     },
     QuestionStyle: {
         padding: "50px",
-        marginBottom: "80px !important",
+        marginTop: "13px",
+
+        // marginBottom: "80px !important",
+        "@media (max-width:600px)": {
+            padding: "30px",
+            marginBottom: "50px !important",
+        },
+    },
+    AnswerStyle: {
+        padding: "50px",
+        // marginBottom: "80px !important",
         "@media (max-width:600px)": {
             padding: "30px",
             marginBottom: "50px !important",
@@ -105,55 +105,53 @@ const useStyles = makeStyles((theme) => ({
 export const Home = (props) => {
     // ============= CRUD functions ============= //
 
+    // ============= CRUD functions ============= //
 
-// ============= CRUD functions ============= //
+    const classes = useStyles();
 
-  const classes = useStyles();
+    const [flashcards, setFlashcards] = useState([]);
 
-  const [flashcards, setFlashcards] = useState([]);
+    const getFlashcard = () => {
+        axios
+            .get("https://flashcards-backend-ga.herokuapp.com/api/flashcards")
+            .then(
+                (response) => setFlashcards(response.data),
+                (err) => console.error(err)
+            )
+            .catch((error) => console.error(error));
+    };
 
-  const getFlashcard = () => {
-    axios
-         .get('http://localhost:8000/api/flashcards')
-         .then(
-           (response) => setFlashcards(response.data),
-           (err) => console.error(err)
-         )
-         .catch((error) => console.error(error))
-  }
+    // =========== Progress Bar =========== //
 
-// =========== Progress Bar =========== //
+    const [progress, setProgress] = useState(0);
 
-  const [progress, setProgress] = useState(0)
-  
-  const [checked, setChecked] = useState(false)
+    const [checked, setChecked] = useState(false);
 
-  // const progressFunction = () => {
-  //   if (checked) {
-  //     setProgress(progress + 10)
-  //   } else if (!checked) {
-  //     setProgress(progress - 10)
-  //   }
-  // } 
+    const progressFunction = () => {
+        if (checked) {
+            setProgress(progress + 10);
+        } else if (!checked) {
+            setProgress(progress - 10);
+        }
+    };
 
-  const starCheck = () => {
-    if (!checked) {
-      setChecked(!checked)
-      setProgress(progress + 10)
-    } else if (checked) {
-      setChecked(!checked)
-      setProgress(progress - 10)
-    }
-  }
+    const starCheck = () => {
+        if (!checked) {
+            setChecked(!checked);
+            setProgress(progress + 10);
+        } else if (checked) {
+            setChecked(!checked);
+            setProgress(progress - 10);
+        }
+    };
 
-  console.log(progress);
-  console.log(checked);
+    console.log(progress);
+    console.log(checked);
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
     // if children.index = 2
     // display "in" progress bar '2 out of <children.length>'
-
 
     // Maybe make a checkbox (star) button on each card that when checked, increases the progress bar?
 
@@ -206,7 +204,6 @@ export const Home = (props) => {
                 </Toolbar>
             </AppBar>
 
-
             <img src={FlashPrep} className="logo" />
             {/* -------- Carousel ------- */}
             <div className="flashcards">
@@ -222,7 +219,7 @@ export const Home = (props) => {
                             swipe="true"
                             // index={2}
                             onChange={progressFunction}
-                            IndicatorIcon={arrayOfNumbers}
+                            // IndicatorIcon={arrayOfNumbers}
                             NavButton={({ onClick, className, style, next, prev }) => {
                                 return (
                                     <Button onClick={onClick} className={className} style={style}>
@@ -239,18 +236,21 @@ export const Home = (props) => {
                                             {/* --- Front of card --- */}
                                             <div>
                                                 <Card className="Card1">
-                                                    <Typography marginBottom="20px" padding="30px" variant="h3">
+                                                    <Typography padding="30px" variant="h4">
                                                         Subject: {flashcard.subject}
                                                     </Typography>
+
                                                     <Typography className={classes.QuestionStyle} variant="h4">
                                                         {flashcard.question}
                                                     </Typography>
+
                                                     <div className="CardAction">
                                                         {/* ---- Flip button ---- */}
                                                         <Button variant="contained" size="large" color="primary" onClick={handleFlip} startIcon={<PreviewIcon />}>
                                                             Show Answer
                                                         </Button>
-                                                      <Checkbox 
+                                                    </div>
+                                                    <Checkbox
                                                         // onChange={progressFunction}
                                                         onChange={starCheck}
                                                         icon={<StarOutlineIcon fontSize="large" />}
@@ -258,21 +258,20 @@ export const Home = (props) => {
                                                         // checked={false}
                                                         // required
                                                         // need value?
-                                                      />
-                                                    </div>
+                                                    />
                                                 </Card>
                                             </div>
                                             {/* --- Back of card --- */}
                                             <div>
                                                 <Card className="Card1">
                                                     <CardContent>
-                                                        <Typography paddingTop="20px" marginBottom="80px" variant="h3"></Typography>
+                                                        <Typography paddingTop="20px" marginBottom="60px" variant="h3"></Typography>
                                                         <Typography className={classes.QuestionStyle} variant="h4">
                                                             {flashcard.answer}
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions className="CardAction">
-                                                        <Button variant="contained" size="large" color="primary" paddingBottom="20px" onClick={handleFlip}>
+                                                        <Button variant="contained" size="large" color="primary" onClick={handleFlip}>
                                                             Flip
                                                         </Button>
                                                     </CardActions>

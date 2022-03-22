@@ -54,11 +54,11 @@ code {
 }
 
 .logo {
-  width: 40%;
-  border-radius: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 5px 5px rgba(139, 192, 216);
-  margin-bottom: 2rem;
+    width: 313px;
+    border-radius: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 5px 5px rgba(139, 192, 216);
+    margin-bottom: 2rem;
 }

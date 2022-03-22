@@ -65,8 +65,8 @@ body {
     border: 2px solid rgba(157, 157, 157, 0.406);
     border-radius: 8px;
     /* box-shadow: 8px 10px 5px grey; */
-    width: 80%;
-    height: 450px;
+    width: 776px;
+    height: 362px;
     padding-bottom: 0;
 }
 
@@ -121,7 +121,7 @@ body {
 
 #progressBar {
     display: flex;
-    width: 80%;
+    width: 776px;
 }
 
 .cardsContainer {
