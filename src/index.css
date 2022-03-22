@@ -10,26 +10,56 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: linear-gradient(359.3deg, rgba(196, 214, 252, 1) 1%, rgba(187, 187, 187, 0) 70.9%);
+    background-image: linear-gradient( 178deg,  rgba(201,234,252,0.51) 14.9%, rgba(139,192,216,0.73) 80% );
     /* This drops it for all pages */
-    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-size: cover;
+    height: 100%;
+    background-attachment: fixed;
 }
+
+/* .add {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient( 178deg,  rgba(201,234,252,0.51) 14.9%, rgba(139,192,216,0.73) 80% );
+  /* This drops it for all pages */
+  /* background-repeat: no-repeat; */
+  /* background-size: 100%; */
+  /* background-size: cover; */
+  /* height: 1000px; */
+/* } */
+
+/* .home {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient( 178deg,  rgba(201,234,252,0.51) 14.9%, rgba(139,192,216,0.73) 80% );
+  /* This drops it for all pages */
+  /* background-repeat: no-repeat; */
+  /* background-size: 100%; */
+  /* background-size: cover; */
+  /* height: 1000px; */
+/* }  */
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .carousel {
-    /* background-image: url(https://image.shutterstock.com/image-vector/index-card-vector-260nw-5345878.jpg);
-  background-repeat: no-repeat;
-  background-size: cover; */
-    padding-bottom: 100px;
-    background-image: linear-gradient(178deg, rgba(201, 234, 252, 0.51) 14.9%, rgba(139, 192, 216, 0.73) 80%);
+  border: 2px solid rgba(157, 157, 157, 0.406);
+  border-radius: 8px;
+  /* box-shadow: 8px 10px 5px grey; */
+  width: 776px;
+  height: 362px;
+  padding-bottom: 0;
 }
 
 .toolbar {
     display: flex;
-
     justify-content: start;
     padding: 0 !important;
 }
@@ -47,4 +77,134 @@ code {
 
 .footer a:hover {
     color: darkmagenta;
+}
+
+.logo {
+    width: 313px;
+    border-radius: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 5px 5px rgba(139, 192, 216);
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        width: 200px;
+    }
+}
+
+#AppBar {
+  margin-bottom: 40px;
+}
+
+.Card1 {
+  height: 360px !important;
+}
+
+/* .Card1 {
+  height: 100;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+} */
+
+.CardAction {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px 0;
+}
+
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  box-shadow: none;
+}
+
+.css-1abc02a {
+  height: auto;
+}
+
+/* .carousel {
+  border: 2px solid rgba(157, 157, 157, 0.406);
+  border-radius: 8px;
+  /* box-shadow: 8px 10px 5px grey; */
+  /* width: 776px;
+  height: 362px;
+  padding-bottom: 0;
+} */
+
+#editForm {
+  padding: 40px;
+  text-align: start;
+}
+
+.AppBar a {
+  text-decoration: none !important;
+}
+
+.linkStyle a {
+  text-decoration: none;
+}
+
+#carouselContainer {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .css-480o17-MuiGrid-root {
+      box-sizing: border-box;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      width: 100%;
+      -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      margin-top: -32px;
+      width: calc(100% + 32px);
+      margin-left: 0px !important;
+  }
+
+  .cardsContainer {
+      padding: 10px 0 !important;
+  }
+
+  .Card1 {
+      height: 361px !important;
+  }
+
+  .carousel {
+      width: 373px;
+  }
+
+  #progressBar {
+      width: 373px;
+  }
+}
+
+.progressBarContainer {
+  display: flex;
+
+  justify-content: center;
+}
+
+#progressBar {
+  display: flex;
+  width: 776px;
+}
+
+.cardsContainer {
+  padding: 40px 0;
+}
+
+#cardContent {
+  min-height: 130px;
 }
