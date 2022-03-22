@@ -113,13 +113,26 @@ export const Home = (props) => {
   
   const [checked, setChecked] = useState(false)
 
-  const progressFunction = () => {
-    if (setChecked(true)) {
+  // const progressFunction = () => {
+  //   if (checked) {
+  //     setProgress(progress + 10)
+  //   } else if (!checked) {
+  //     setProgress(progress - 10)
+  //   }
+  // } 
+
+  const starCheck = () => {
+    if (!checked) {
+      setChecked(!checked)
       setProgress(progress + 10)
-    } else if (setChecked(false)) {
+    } else if (checked) {
+      setChecked(!checked)
       setProgress(progress - 10)
     }
-  }   
+  }
+
+  console.log(progress);
+  console.log(checked);
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
@@ -127,7 +140,6 @@ export const Home = (props) => {
     // display "in" progress bar '2 out of <children.length>'
 
     // Maybe make a checkbox (star) button on each card that when checked, increases the progress bar?
-
 
     // Try messing around with props inside LinearProgress componenet?
 
@@ -262,9 +274,13 @@ export const Home = (props) => {
                             </Button>
                           </div>
                           <Checkbox 
-                            onChange={progressFunction}
+                            // onChange={progressFunction}
+                            onChange={starCheck}
                             icon={<StarOutlineIcon fontSize="large" />}
                             checkedIcon={<StarIcon fontSize="large" />}
+                            // checked={false}
+                            // required
+                            // need value?
                           />
                         </Card>
                       </div>
