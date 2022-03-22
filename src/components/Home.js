@@ -222,7 +222,7 @@ export const Home = (props) => {
                             duration="400"
                             swipe="true"
                             // index={2}
-                            onChange={progressFunction}
+                            // onChange={progressFunction}
                             // IndicatorIcon={arrayOfNumbers}
                             NavButton={({ onClick, className, style, next, prev }) => {
                                 return (
@@ -265,7 +265,6 @@ export const Home = (props) => {
                                                       />
                                                       {/* : null } */}
                                                     </Card>
-                                                </Card>
                                             </div>
                                             {/* --- Back of card --- */}
                                             <div>
