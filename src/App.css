@@ -37,7 +37,7 @@ body {
 }
 
 .Card1 {
-    height: 570px !important;
+    height: 360px !important;
 }
 
 /* .Card1 {
@@ -52,7 +52,7 @@ body {
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    margin: 20px 0;
+    margin-top: 20px 0;
 }
 
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
@@ -65,8 +65,8 @@ body {
     border: 2px solid rgba(157, 157, 157, 0.406);
     border-radius: 8px;
     /* box-shadow: 8px 10px 5px grey; */
-    width: 80%;
-    height: 450px;
+    width: 776px;
+    height: 362px;
     padding-bottom: 0;
 }
 
@@ -86,4 +86,60 @@ body {
 #carouselContainer {
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .css-480o17-MuiGrid-root {
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        width: 100%;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-top: -32px;
+        width: calc(100% + 32px);
+        margin-left: 0px !important;
+    }
+
+    .cardsContainer {
+        padding: 10px 0 !important;
+    }
+
+    .Card1 {
+        height: 361px !important;
+    }
+
+    .carousel {
+        width: 373px;
+    }
+
+    #progressBar {
+        width: 373px;
+    }
+}
+
+.progressBarContainer {
+    display: flex;
+
+    justify-content: center;
+}
+
+#progressBar {
+    display: flex;
+    width: 776px;
+}
+
+.cardsContainer {
+    padding: 40px 0;
+}
+
+#cardContent {
+    min-height: 130px;
 }
