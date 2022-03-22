@@ -111,7 +111,9 @@ export const Home = (props) => {
 
   const [progress, setProgress] = useState(0)
   
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(true)
+
+  const [selectIndex, setSelectIndex] = useState(0);
 
   // const progressFunction = () => {
   //   if (checked) {
@@ -121,18 +123,20 @@ export const Home = (props) => {
   //   }
   // } 
 
-  const starCheck = () => {
-    if (!checked) {
-      setChecked(!checked)
+  const starCheck = (index) => {
+    // if (checked) {
+      // setSelectIndex(index)
+      // setChecked(!checked)
       setProgress(progress + 10)
-    } else if (checked) {
-      setChecked(!checked)
-      setProgress(progress - 10)
-    }
+    // } else if (!checked) {
+    //   setSelectIndex(index)
+    //   setChecked(checked)
+    //   setProgress(progress - 10)
+    // }
   }
 
-  console.log(progress);
-  console.log(checked);
+  // console.log(progress);
+  // console.log(checked);
 
     // Need to grab the index of the card displayed --
     // then show a number based on that index
@@ -189,24 +193,8 @@ export const Home = (props) => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-      {/* ----- App Name and Slogan ----- */}
-      {/* <Typography 
-        variant="h2" 
-        align="center" 
-        color="textPrimary" 
-        
-      >
-      FlashPrep
-      </Typography> */}
+      {/* ----- App Logo ----- */}
       <img src={FlashPrep} className="logo" />
-      {/* <Typography 
-        variant="h5" 
-        align="center" 
-        color="textSecondary" 
-        paragraph
-      >
-      Index Cards On the Flash
-      </Typography> */}
       {/* -------- Carousel ------- */}
       <div className="flashcards">
         <Typography 
@@ -273,15 +261,16 @@ export const Home = (props) => {
                             Show Answer
                             </Button>
                           </div>
+                          {/* {selectIndex === index ?  */}
                           <Checkbox 
-                            // onChange={progressFunction}
-                            onChange={starCheck}
+                            onClick={() => {starCheck(index)}}
                             icon={<StarOutlineIcon fontSize="large" />}
                             checkedIcon={<StarIcon fontSize="large" />}
-                            // checked={false}
+                            // checked={!checked}
                             // required
                             // need value?
                           />
+                          {/* : null } */}
                         </Card>
                       </div>
                       {/* --- Back of card --- */}
