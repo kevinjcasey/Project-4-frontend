@@ -19,6 +19,7 @@ Interactive study guide application that allows users to create, read, update, a
 - Django
 - postgreSQL
 - Material-UI
+- Canva
 - Deployed via Heroku
 
 ## Author(s) Info
