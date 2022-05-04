@@ -153,6 +153,7 @@ export const Home = (props) => {
   // console.log(progress);
   // console.log(checked);
 
+
     // Need to grab the index of the card displayed --
     // then show a number based on that index
     // if children.index = 2
